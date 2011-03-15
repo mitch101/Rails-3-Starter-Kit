@@ -17,18 +17,24 @@ Add the following to your ~/.profile:
 
 Load your .profile:
 
->$ source ~/.profile
->$ rvm -v
->$ rvm list
+    $ source ~/.profile
+    $ rvm -v
+    $ rvm list
 
 ### Install ruby 1.8.7:
 
 >$ rvm install 1.8.7
+
 >$ rvm 1.8.7 --default
+
 >$ ruby -v
+
 >$ rvm list
+
 >$ rvm gemdir
+
 >$ gem -v
+
 >$ gem list
 
 Make gem install not compile rdoc or ri, add the following to ~/.gemrc:
@@ -38,6 +44,7 @@ Make gem install not compile rdoc or ri, add the following to ~/.gemrc:
 ### Install rails:
 
 >$ gem install rails
+
 >$ rails -v
 
 ## Postgres Setup
