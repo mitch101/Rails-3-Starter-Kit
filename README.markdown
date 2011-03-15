@@ -108,7 +108,23 @@ Setup your ~.irbrc to look like:
       end
     end
 
-## Create a new app from the template.
+## Create the perfect rails app.
+
+template.rb will create an app with the following features:
+
+* rspec with generators working
+  * this is inside
+* factory_girl with generators working, and loaded in rspec
+* jquery replacing prototype and included in the default layout
+* haml with generators working, and replacing default layout with a haml layout.
+* postgres configured (optional, with provided password)
+* ruby debug
+* awesome_print
+* annotate-models
+* a good .gitignore file
+* initalize and commit a git repository
+* clean up of some unused rails files.
+
 
     $ rails new [myapp] -J -T -m /path/to/template.rb
     
