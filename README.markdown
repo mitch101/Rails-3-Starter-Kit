@@ -56,60 +56,7 @@ Reload your ~/.profile:
 
     $ source ~/.profile
 
-### Create a new rails app using postgres
-
-Create a new app with a database.yml setup for postgres, and the pg gem added in Gemfile:
-
-    $ rails new pgtest -d postgresql
-
-Edit your database.yml: Set the proper username and password for each db, and remove all the annoying comments. 
-
-Create your databases.
-
-    $ rake db:create:all
-
-### Add postgres to an existing rails app
-
-Add pg gem to Gemfile
-
-    gem ‘pg’
-
-Replace config/database.yml with:
-  
-    development:
-      adapter: postgresql
-      encoding: unicode
-      database: [appname]_development
-      pool: 5
-      username: postgres
-      password: [password]
-
-    test:
-      adapter: postgresql
-      encoding: unicode
-      database: [appname]_test
-      pool: 5
-      username: postgres
-      password: [password]
-
-    production:
-      adapter: postgresql
-      encoding: unicode
-      database: [appname]_production
-      pool: 5
-      username: postgres
-      password: [password]
-
-Create your databases.
-
-    $ rake db:create:all
-
-### Optional: Install navicat for administering postgres
-
-Download [navicat lite](http://www.navicat.com/en/download/download.html) for administering postgres. 
-
 ## Pimp Your Console
-
 
 Add awesome printing (colors and formatting of console output)
 
@@ -160,6 +107,58 @@ Setup your ~.irbrc to look like:
         ActiveRecord::Base.instance_eval { alias :[] :find }
       end
     end
+
+## Create a new app from the template.
+
+    $ rails new [myapp] -J -T -m /path/to/template.rb
+    
+## Bonus Setup
+
+### Install Textmate Bundles
+
+Install rspec textmate bundle (for syntax highlighting and running of an open test file in tm using cmd-r with a nice html output).
+
+Follow the instuctions here:
+http://rspec.info/documentation/tools/extensions/editors/textmate.html
+
+or here:
+http://stackoverflow.com/questions/3532538/installing-rspec-bundle-for-textmate
+
+Install Haml textmate bundle...
+
+### Install Autotest and Spork for fast, continuous testing
+
+Install autotest
+
+First, make sure you have growl installed and running on login.
+
+> gem install autotest-standalone
+> gem install autotest-fsevent
+> gem install autotest-growl
+
+Setup autotest to use fsevent and growl. Create ~/.autotest with:
+	require 'autotest/fsevent'
+	require 'autotest/growl'
+
+Make sure you have growl configured to accept the autotest application.
+
+Run autotest:
+> autotest
+
+It will watch for changes to specs and source code of all your apps and run any required tests.
+
+Optional: Install spork to increase your test speed.
+
+Follow the instructions here:
+http://www.rubyinside.com/how-to-rails-3-and-rspec-2-4336.html
+
+### Load jQuery and jQuery-UI from google
+
+See: http://code.google.com/apis/libraries/devguide.html 
+and add script tags to load the desired libraries. Remove :defaults, and add the scripts you want to load manually.
+
+jquery-ui css is hosted at:
+	http://ajax.googleapis.com/ajax/libs/jqueryui/[UI.VERSION]/themes/[THEME-NAME]/jquery-ui.css
 
 
 ## Setup Fast, Continuous RSpec Testing
