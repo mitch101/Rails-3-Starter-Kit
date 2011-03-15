@@ -117,6 +117,7 @@ template.rb will create an app with the following features:
 * jquery replacing prototype and included in the default layout
 * haml with generators working, and replacing default layout with a haml layout.
 * postgres configured (optional, with provided password)
+* cucumber with capybara for integration testing.
 * ruby debug
   * debug app using "rails s --debug", and add "debugger" in code
 * awesome_print
@@ -161,7 +162,7 @@ Run autotest:
 It will watch for changes to specs and source code of all your apps and run any required tests.
 
 Install spork to increase your test speed. Follow the instructions [here](
-http://www.rubyinside.com/how-to-rails-3-and-rspec-2-4336.html)
+http://www.rubyinside.com/how-to-rails-3-and-rspec-2-4336.html).
 
 ### Load jQuery and jQuery-UI from google
 
@@ -174,6 +175,8 @@ and add script tags to load the desired libraries. Remove :defaults, and add the
 jquery-ui css is hosted at:
       
       http://ajax.googleapis.com/ajax/libs/jqueryui/[UI.VERSION]/themes/[THEME-NAME]/jquery-ui.css
+      
+### Add Flutie for nice stylesheets out of the box
 
 
 

@@ -8,6 +8,8 @@ gem "rspec-rails", :group => [:development, :test]
 gem "ruby-debug"
 gem "awesome_print"
 gem "annotate-models"
+gem 'cucumber-rails'
+gem 'capybara'
 
 #--------------------------
 # FACTORY_GIRL
@@ -55,6 +57,7 @@ create_file "app/views/layouts/application.html.haml", layout
 run 'bundle install'
 generate 'jquery:install'
 generate 'rspec:install'
+generate 'cucumber:install'
 
 #--------------------------
 # POSTGRES
@@ -66,36 +69,38 @@ if yes?("\r\nInstall with postgres?")
   postgres_pass = ask("\r\nEnter your postgres password:")
   remove_file "config/database.yml"
   create_file "config/database.yml", <<-DATABASE
-  development:
-    adapter: postgresql
-    encoding: unicode
-    database: #{app_name}_development
-    pool: 5
-    username: postgres
-    password: #{postgres_pass}
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: #{app_name}_development
+  pool: 5
+  username: postgres
+  password: #{postgres_pass}
 
-  test:
-    adapter: postgresql
-    encoding: unicode
-    database: #{app_name}_test
-    pool: 5
-    username: postgres
-    password: #{postgres_pass}
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: #{app_name}_test
+  pool: 5
+  username: postgres
+  password: #{postgres_pass}
 
-  production:
-    adapter: postgresql
-    encoding: unicode
-    database: #{app_name}_production
-    pool: 5
-    username: postgres
-    password: #{postgres_pass}
-  DATABASE
-  # Create databases
-  rake "db:create:all"
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: #{app_name}_production
+  pool: 5
+  username: postgres
+  password: #{postgres_pass}
+DATABASE
   # Install pg gem.
   gem 'pg'
   run 'bundle install'
+  # Create databases
+  rake "db:create:all"
 end
+
+rake "db:migrate"
 
 #--------------------------
 # CLEANUP
