@@ -1,15 +1,5 @@
 # Setup the perfect ruby on rails rpp from scratch
 
-## TODos
-
-* Add flutie in the template for nice stylesheets out of the box.
-* Add essential bookmarks to the optional section of this readme. (capybara doc, apidock, railscasts...)
-* Write-up tmbundle installs (include cucumber highlighting and running)
-* Make sure fg works in cucumber, check out and doc cuc steps from fg.
-* Write helper file including writing up websteps from capy, and fg s.t we write tests quickly, and other essential things.
-* Add rcov and other coding standards metrics and write how to use them.
-* Write a basic every day commands list so we're all using all the power here.
-
 ## Assumptions
 
 I will assume you currently have Mac OSX 10.6, XCode / Developer Kit, Git, Growl, Textmate.
@@ -189,5 +179,14 @@ jquery-ui css is hosted at:
       http://ajax.googleapis.com/ajax/libs/jqueryui/[UI.VERSION]/themes/[THEME-NAME]/jquery-ui.css
 
 
+## TODos
+
+* Add flutie in the template for nice stylesheets out of the box.
+* Add essential bookmarks to the optional section of this readme. (capybara doc, apidock, railscasts...)
+* Write-up tmbundle installs (include cucumber highlighting and running)
+* Make sure fg works in cucumber, check out and doc cuc steps from fg.
+* Write helper file including writing up websteps from capy, and fg s.t we write tests quickly, and other essential things.
+* Add rcov and other coding standards metrics and write how to use them.
+* Write a basic every day commands list so we're all using all the power here.
 
 
