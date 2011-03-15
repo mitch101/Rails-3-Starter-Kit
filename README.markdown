@@ -1,4 +1,4 @@
-# Setup the perfect Ruby on Rails App 
+# Setup the perfect Ruby o
 
 ## Assumptions
 
