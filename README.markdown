@@ -113,20 +113,25 @@ Setup your ~.irbrc to look like:
 template.rb will create an app with the following features:
 
 * rspec with generators working
-  * this is inside
-* factory_girl with generators working, and loaded in rspec
+* factory_girl with generators working loaded in rspec
 * jquery replacing prototype and included in the default layout
 * haml with generators working, and replacing default layout with a haml layout.
 * postgres configured (optional, with provided password)
 * ruby debug
+  * debug app using "rails s --debug", and add "debugger" in code
 * awesome_print
+  * use "ap" in console
 * annotate-models
+  * show model attributes by running "annotate"
 * a good .gitignore file
 * initalize and commit a git repository
 * clean up of some unused rails files.
 
+Create a new app by running:
 
     $ rails new [myapp] -J -T -m /path/to/template.rb
+
+No additional setup tasks required.
     
 ## Bonus Setup
 
@@ -177,125 +182,6 @@ jquery-ui css is hosted at:
 	http://ajax.googleapis.com/ajax/libs/jqueryui/[UI.VERSION]/themes/[THEME-NAME]/jquery-ui.css
 
 
-## Setup Fast, Continuous RSpec Testing
-
-Create a new app with rspec
-
-Create a new app without test-unit:
-> rails new myapp -T
-
-Include rspec-rails gem. Add the following to Gemfile:
-group :development, :test do
-  gem 'rspec-rails'
-end
-
-Install rspec:
-> bundle
-> rails g rspec:install
-
-The generator creates a few files. Namely:
-.rspec - a config file where we can store extra command line options for the rspec command line tool. By default it contains --colour which turns on colored output from RSpec.
-spec - a directory that will store all of the various model, controller, view, acceptance and other specs for your app
-spec/spec_helper.rb - a file that's loaded by every spec (not in any automatic way but most have require 'spec_helper' at the top). It sets the test environment, contains app level RSpec configuration items, loads support files, and more.
-
-You can now run specs by using ‘rake’ or ‘rake spec’, and spec scaffolds are auto generated for you when using rails generators.
-
-Install rspec textmate bundle
-
-(For syntax highlighting and running of an open test file in tm using cmd-r with a nice html output)
-
-Follow the instuctions here:
-http://rspec.info/documentation/tools/extensions/editors/textmate.html
-
-or here:
-http://stackoverflow.com/questions/3532538/installing-rspec-bundle-for-textmate
-
-Install autotest
-
-First, make sure you have growl installed and running on login.
-
-> gem install autotest-standalone
-> gem install autotest-fsevent
-> gem install autotest-growl
-
-Setup autotest to use fsevent and growl. Create ~/.autotest with:
-	require 'autotest/fsevent'
-	require 'autotest/growl'
-
-Make sure you have growl configured to accept the autotest application.
-
-Run autotest:
-> autotest
-
-It will watch for changes to specs and source code of all your apps and run any required tests.
-
-Optional: Install spork to increase your test speed.
-
-Follow the instructions here:
-http://www.rubyinside.com/how-to-rails-3-and-rspec-2-4336.html
-
-
-Install factory_girl
-
-Update Gemfile to include:
-group :development, :test do
-  gem 'rails3-generators'
-  gem 'factory_girl_rails'
-end
-
-Setup generators to create factories when we generate a model. In application.rb add:
-config.generators do |g|
-	g.fixture_replacement :factory_girl, :dir => "spec/factories"
-end
-
-
-Install ruby debugger
-
-Add to Gemfile:
-	gem ‘ruby-debug’
-
-Add ‘debugger’ command where you want to enter debugger. Run server using:
-> rails s --debug
-
-
-Install jQuery
-
-Create app with no prototype
-> rails new my_app -J
-
-Install jQuery
-Add to Gemfile:
-	gem ‘jquery-rails’, ‘>= 0.2.6’
-
-> bundle
-> rails g jquery:install (--ui)
-
-Add jquery to the default javascript loaded. 
-
-Edit the following line in application.rb:
-	config.action_view.javascript_expansions[:defaults] = %w()
-To read:
-	config.action_view.javascript_expansions[:defaults] = %w(jquery rails)
-
-Optional: Load jQuery and jQuery-UI from google
-
-See: http://code.google.com/apis/libraries/devguide.html 
-and add script tags to load the desired libraries. Remove :defaults, and add the scripts you want to load manually.
-
-jquery-ui css is hosted at:
-	http://ajax.googleapis.com/ajax/libs/jqueryui/[UI.VERSION]/themes/[THEME-NAME]/jquery-ui.css
-
-
-Install Haml
-
-Add to Gemfile:
-	gem ‘haml-rails’
-
-> bundle
-
-Generators for haml views are included and invoked by default.
-
-Replace default application layout with a haml one.
 
 
 
