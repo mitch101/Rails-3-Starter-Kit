@@ -1,6 +1,7 @@
 # Setup the perfect ruby on rails rpp from scratch
 
-TODO: Add flutie for nice stylesheets out of the box.
+TODO: Add flutie in the template for nice stylesheets out of the box.
+TODO: Add essential bookmarks to the optional section of this readme.
 
 I will assume you currently have Mac OSX 10.6, XCode / Developer Kit, Git, Growl, Textmate.
 
