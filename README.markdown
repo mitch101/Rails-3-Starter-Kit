@@ -40,10 +40,7 @@ Make gem install not compile rdoc or ri, add the following to ~/.gemrc:
     $ gem install rails
     $ rails -v
 
-## Postgres Setup
-
-
-### Install Postgres:
+## Install Postgres  
 
 Get the [one click installer](http://www.postgresql.org/download/macosx) (> v 9.0.3), and run the app inside the dmg. (Note: I had to restart my system and re-run the installer). Use the default settings, set the password to postgres. Don't run stack builder at the end.
 
@@ -56,7 +53,35 @@ Reload your ~/.profile:
 
     $ source ~/.profile
 
-## Pimp Your Console
+## Create the perfect rails app.
+
+template.rb will create an app with the following features:
+
+* rspec with generators working
+* factory_girl with generators working loaded in rspec
+* jquery replacing prototype and included in the default layout
+* haml with generators working, and replacing default layout with a haml layout.
+* postgres configured (optional, with provided password)
+* cucumber with capybara for integration testing.
+* ruby debug
+  * debug app using "rails s --debug", and add "debugger" in code
+* awesome_print
+  * use "ap" in console
+* annotate-models
+  * show model attributes by running "annotate"
+* a good .gitignore file
+* initalize and commit a git repository
+* clean up of some unused rails files.
+
+Create a new app by running:
+
+    $ rails new [myapp] -J -T -m /path/to/template.rb
+
+No additional setup tasks required.
+    
+## Bonus Setup
+
+### Pimp Your Console
 
 Add awesome printing (colors and formatting of console output)
 
@@ -108,33 +133,6 @@ Setup your ~.irbrc to look like:
       end
     end
 
-## Create the perfect rails app.
-
-template.rb will create an app with the following features:
-
-* rspec with generators working
-* factory_girl with generators working loaded in rspec
-* jquery replacing prototype and included in the default layout
-* haml with generators working, and replacing default layout with a haml layout.
-* postgres configured (optional, with provided password)
-* cucumber with capybara for integration testing.
-* ruby debug
-  * debug app using "rails s --debug", and add "debugger" in code
-* awesome_print
-  * use "ap" in console
-* annotate-models
-  * show model attributes by running "annotate"
-* a good .gitignore file
-* initalize and commit a git repository
-* clean up of some unused rails files.
-
-Create a new app by running:
-
-    $ rails new [myapp] -J -T -m /path/to/template.rb
-
-No additional setup tasks required.
-    
-## Bonus Setup
 
 ### Install Textmate Bundles
 
