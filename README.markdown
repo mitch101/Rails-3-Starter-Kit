@@ -1,7 +1,12 @@
 # Setup the perfect ruby on rails rpp from scratch
 
 TODO: Add flutie in the template for nice stylesheets out of the box.
-TODO: Add essential bookmarks to the optional section of this readme.
+TODO: Add essential bookmarks to the optional section of this readme. (capybara doc, apidock, railscasts...)
+TODO: Write-up tmbundle installs (include cucumber highlighting and running)
+TODO: Make sure fg works in cucumber, check out and doc cuc steps from fg.
+TODO: Write helper file including writing up websteps from capy, and fg s.t we write tests quickly, and other essential things.
+TODO: Add rcov and other coding standards metrics and write how to use them.
+TODO: Write a basic every day commands list so we're all using all the power here.
 
 I will assume you currently have Mac OSX 10.6, XCode / Developer Kit, Git, Growl, Textmate.
 
