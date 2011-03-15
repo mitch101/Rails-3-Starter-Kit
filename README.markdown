@@ -137,49 +137,43 @@ No additional setup tasks required.
 
 ### Install Textmate Bundles
 
-Install rspec textmate bundle (for syntax highlighting and running of an open test file in tm using cmd-r with a nice html output).
+Install rspec textmate bundle (for syntax highlighting and running of an open test file in tm using cmd-r with a nice html output). Follow the instuctions [here](http://rspec.info/documentation/tools/extensions/editors/textmate.html), or [here](http://stackoverflow.com/questions/3532538/installing-rspec-bundle-for-textmate)
 
-Follow the instuctions here:
-http://rspec.info/documentation/tools/extensions/editors/textmate.html
-
-or here:
-http://stackoverflow.com/questions/3532538/installing-rspec-bundle-for-textmate
-
-Install Haml textmate bundle...
+Install Haml textmate bundle...?
 
 ### Install Autotest and Spork for fast, continuous testing
 
-Install autotest
-
 First, make sure you have growl installed and running on login.
 
-> gem install autotest-standalone
-> gem install autotest-fsevent
-> gem install autotest-growl
+    $ gem install autotest-standalone
+    $ gem install autotest-fsevent
+    $ gem install autotest-growl
 
 Setup autotest to use fsevent and growl. Create ~/.autotest with:
-	require 'autotest/fsevent'
-	require 'autotest/growl'
+  	require 'autotest/fsevent'
+  	require 'autotest/growl'
 
 Make sure you have growl configured to accept the autotest application.
 
 Run autotest:
-> autotest
+    $ autotest
 
 It will watch for changes to specs and source code of all your apps and run any required tests.
 
-Optional: Install spork to increase your test speed.
-
-Follow the instructions here:
-http://www.rubyinside.com/how-to-rails-3-and-rspec-2-4336.html
+Install spork to increase your test speed. Follow the instructions [here](
+http://www.rubyinside.com/how-to-rails-3-and-rspec-2-4336.html)
 
 ### Load jQuery and jQuery-UI from google
 
-See: http://code.google.com/apis/libraries/devguide.html 
+See: 
+
+    http://code.google.com/apis/libraries/devguide.html 
+
 and add script tags to load the desired libraries. Remove :defaults, and add the scripts you want to load manually.
 
 jquery-ui css is hosted at:
-	http://ajax.googleapis.com/ajax/libs/jqueryui/[UI.VERSION]/themes/[THEME-NAME]/jquery-ui.css
+      
+      http://ajax.googleapis.com/ajax/libs/jqueryui/[UI.VERSION]/themes/[THEME-NAME]/jquery-ui.css
 
 
 
