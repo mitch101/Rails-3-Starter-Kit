@@ -1,8 +1,8 @@
-# Setup the perfect Ruby on Rails App 
+# Setup the perfect ruby on rails rpp from scratch
 
-## Assumptions
+TODO: Add flutie for nice stylesheets out of the box.
 
-Mac OSX 10.6, XCode / Developer Kit, Git, Growl, Textmate already installed.
+I will assume you currently have Mac OSX 10.6, XCode / Developer Kit, Git, Growl, Textmate.
 
 ## Basic Install
 
@@ -175,9 +175,6 @@ and add script tags to load the desired libraries. Remove :defaults, and add the
 jquery-ui css is hosted at:
       
       http://ajax.googleapis.com/ajax/libs/jqueryui/[UI.VERSION]/themes/[THEME-NAME]/jquery-ui.css
-      
-### Add Flutie for nice stylesheets out of the box
-
 
 
 
