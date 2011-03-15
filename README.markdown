@@ -1,4 +1,4 @@
-# Setup the perfect Ruby o
+# Setup the perfect Ruby on Rails App 
 
 ## Assumptions
 
@@ -8,7 +8,7 @@ Mac OSX 10.6, XCode / Developer Kit, Git, Growl, Textmate already installed.
 
 ### Install rvm:
 
->$ mkdir -p ~/.rvm/src/ && cd ~/.rvm/src && rm -rf ./rvm/ && git clone git://github.com/wayneeseguin/rvm.git && cd rvm && ./install
+    $ mkdir -p ~/.rvm/src/ && cd ~/.rvm/src && rm -rf ./rvm/ && git clone git://github.com/wayneeseguin/rvm.git && cd rvm && ./install
 
 Add the following to your ~/.profile:
 
@@ -23,19 +23,13 @@ Load your .profile:
 
 ### Install ruby 1.8.7:
 
->$ rvm install 1.8.7
-
->$ rvm 1.8.7 --default
-
->$ ruby -v
-
->$ rvm list
-
->$ rvm gemdir
-
->$ gem -v
-
->$ gem list
+    $ rvm install 1.8.7
+    $ rvm 1.8.7 --default
+    $ ruby -v
+    $ rvm list
+    $ rvm gemdir
+    $ gem -v
+    $ gem list
 
 Make gem install not compile rdoc or ri, add the following to ~/.gemrc:
   
@@ -43,9 +37,8 @@ Make gem install not compile rdoc or ri, add the following to ~/.gemrc:
 
 ### Install rails:
 
->$ gem install rails
-
->$ rails -v
+    $ gem install rails
+    $ rails -v
 
 ## Postgres Setup
 
@@ -61,19 +54,19 @@ Add the following to your ~/.profile:
 
 Reload your ~/.profile:
 
->$ source ~/.profile
+    $ source ~/.profile
 
 ### Create a new rails app using postgres
 
 Create a new app with a database.yml setup for postgres, and the pg gem added in Gemfile:
 
->$ rails new pgtest -d postgresql
+    $ rails new pgtest -d postgresql
 
 Edit your database.yml: Set the proper username and password for each db, and remove all the annoying comments. 
 
 Create your databases.
 
->$ rake db:create:all
+    $ rake db:create:all
 
 ### Add postgres to an existing rails app
 
@@ -109,7 +102,7 @@ Replace config/database.yml with:
 
 Create your databases.
 
->$ rake db:create:all
+    $ rake db:create:all
 
 ### Optional: Install navicat for administering postgres
 
@@ -127,7 +120,7 @@ Add to Gemfile in each rails app:
     end
 
 Try it in rails console:
->$ ap { :a => 1, :b => 2 }
+    $ ap { :a => 1, :b => 2 }
 
 Nice console prompt, logging to console, console indenting
 
