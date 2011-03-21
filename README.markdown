@@ -61,18 +61,17 @@ Create a new app by cloning this repository, and running:
     
 Your new app has the following features.
 
-* *Blueprint-CSS:* css reset, default styles, print styles, IE stylesheet, grid system, included in default layout
-
-* *RSpec:* generators working
-* *factory_girl:* generators working, loaded in rspec
-* *jQuery:* replacing prototype, included in the default layout
-* *Haml:* generators working, replacing default layout with a haml layout.
-* *postgres:* (optional) configured with provided password
-* *cucumber and capybara:* for integration testing
-* *ruby debug*
-* *awesome_print*
-* *Metrical* for running metrics on code quality
-* *annotate-models*
+* **Blueprint-CSS:** css reset, default styles, print styles, IE stylesheet, grid system, included in default layout
+* **RSpec:** generators working
+* **factory_girl:** generators working, loaded in rspec
+* **jQuery:** replacing prototype, included in the default layout
+* **Haml:** generators working, replacing default layout with a haml layout.
+* **postgres:** (optional) configured with provided password
+* **cucumber and capybara:** for integration testing
+* **ruby debug**
+* **awesome_print**
+* **Metrical** for running metrics on code quality
+* **annotate-models**
 
 The template also generates a good .gitignore file, initializes an empty git repository, and cleans up some unnecessary rails files.
 
