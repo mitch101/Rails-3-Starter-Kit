@@ -53,33 +53,37 @@ Reload your ~/.profile:
 
     $ source ~/.profile
 
-## Create the perfect rails app.
+## Create a new rails application
 
-template.rb will create an app with the following features:
-
-* The Blueprint-CSS template with css reset, default styles, print styles, and IE stylesheet.
-* rspec with generators working
-* factory_girl with generators working loaded in rspec
-* jquery replacing prototype and included in the default layout
-* haml with generators working, and replacing default layout with a haml layout.
-* postgres configured (optional, with provided password)
-* cucumber with capybara for integration testing.
-* ruby debug
-  * debug app using "rails s --debug", and add "debugger" in code
-* awesome_print
-  * use "ap" in console
-* annotate-models
-  * show model attributes by running "annotate"
-* a good .gitignore file
-* initalize and commit a git repository
-* clean up of some unused rails files.
-* Metrical for runs metrics on code quality.
-
-Create a new app by running:
+Create a new app by cloning this repository, and running:
 
     $ rails new [myapp] -J -T -m /path/to/template.rb
+    
+Your new app has the following features.
+
+* *Blueprint-CSS:* css reset, default styles, print styles, IE stylesheet, grid system, included in default layout
+
+* *RSpec:* generators working
+* *factory_girl:* generators working, loaded in rspec
+* *jQuery:* replacing prototype, included in the default layout
+* *Haml:* generators working, replacing default layout with a haml layout.
+* *postgres:* (optional) configured with provided password
+* *cucumber and capybara:* for integration testing
+* *ruby debug*
+* *awesome_print*
+* *Metrical* for running metrics on code quality
+* *annotate-models*
+
+The template also generates a good .gitignore file, initializes an empty git repository, and cleans up some unnecessary rails files.
 
 No additional setup tasks required.
+
+## Tips for using your new rails application
+    
+debug app using "rails s --debug", and add "debugger" in code
+use "ap" in console    
+show model attributes by running "annotate"
+metrical to run metrics
     
 ## Bonus Setup
 
@@ -193,7 +197,6 @@ jquery-ui css is hosted at:
 ## TODos
 
 * Add essential bookmarks to the optional section of this readme. (capybara doc, apidock, railscasts...)
-* Write-up tmbundle installs (include cucumber highlighting and running)
 * Make sure fg works in cucumber, check out and doc cuc steps from fg.
 * Write helper file including writing up websteps from capy, and fg s.t we write tests quickly, and other essential things.
 * Write a basic every day commands list so we're all using all the power here. / How to use the app.
