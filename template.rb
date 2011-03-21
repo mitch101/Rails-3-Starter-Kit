@@ -47,7 +47,7 @@ layout = <<-LAYOUT
     %title #{app_name.humanize}
     = stylesheet_link_tag 'blueprint-css-1.0/screen.css', :media => 'screen, projection'
     = stylesheet_link_tag 'blueprint-css-1.0/print.css', :media => 'print'
-    /[if IE]
+    /[if lt IE 8]
       = stylesheet_link_tag 'blueprint-css-1.0/ie.css', :media => 'screen, projection'
     = javascript_include_tag :defaults
     = csrf_meta_tag

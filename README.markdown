@@ -179,12 +179,20 @@ jquery-ui css is hosted at:
       
     http://ajax.googleapis.com/ajax/libs/jqueryui/[UI.VERSION]/themes/[THEME-NAME]/jquery-ui.css
 
+### Bookmark some essential pages
+
+* [Railscasts](railscasts.com)
+* [Rails Guides](http://guides.rubyonrails.org/) (Rails reference)
+* [RSpec Reference](http://relishapp.com/rspec/)
+* [Capybara Reference](https://github.com/jnicklas/capybara)
+* [API Dock](http://apidock.com/) (Rails, Ruby, RSpec documentation) 
+
+
 
 ## TODos
 
 * Add essential bookmarks to the optional section of this readme. (capybara doc, apidock, railscasts...)
 * Make sure fg works in cucumber, check out and doc cuc steps from fg.
 * Write helper file including writing up websteps from capy, and fg s.t we write tests quickly, and other essential things.
-* Write a basic every day commands list so we're all using all the power here. / How to use the app.
 
 
