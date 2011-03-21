@@ -185,9 +185,8 @@ jquery-ui css is hosted at:
 * [Rails Guides](http://guides.rubyonrails.org/) (Rails reference)
 * [RSpec Reference](http://relishapp.com/rspec/)
 * [Capybara Reference](https://github.com/jnicklas/capybara)
+* [Blueprint Examples](http://www.blueprintcss.org/tests/)
 * [API Dock](http://apidock.com/) (Rails, Ruby, RSpec documentation) 
-
-
 
 ## TODos
 
