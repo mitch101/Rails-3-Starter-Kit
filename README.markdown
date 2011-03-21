@@ -53,6 +53,25 @@ Reload your ~/.profile:
 
     $ source ~/.profile
 
+## Install Textmate Bundles
+
+    $ mkdir -p ~/Library/Application\ Support/TextMate/Bundles/
+    $ cd ~/Library/Application\ Support/TextMate/Bundles/
+
+Install rspec textmate bundle:
+
+    $ git clone git://github.com/rspec/rspec-tmbundle.git RSpec.tmbundle
+
+Install Haml textmate bundle:
+
+    $ git clone git://github.com/phuibonhoa/handcrafted-haml-textmate-bundle.git Haml.tmbundle
+
+Install cucumber bundle:
+
+    $ git clone git://github.com/aslakhellesoy/cucumber-tmbundle.git Cucumber.tmbundle
+
+Bundles > Bundle Editor > Reload Bundles, in TextMate.
+
 ## Create a new rails application
 
 Create a new app by cloning this repository, and running:
@@ -79,29 +98,17 @@ No additional setup tasks required.
 
 ## Tips for using your new rails application
     
-debug app using "rails s --debug", and add "debugger" in code
-use "ap" in console    
-show model attributes by running "annotate"
-metrical to run metrics
+* Debug your app by adding *debugger* in your code. Use *rails s --debug* to debug in server. Type *help* in debugger to learn commands.
+* Use *ap* to print awesomely in the console.
+* Annotate your models by running *annotate* at any time.
+* Generate code quality metrics by running *metrical*.
+* Run individual specs or feature files in textmate by typing: *cmd-r*.
     
 ## Bonus Setup
 
 ### Pimp Your Console
 
-Add awesome printing (colors and formatting of console output)
-
-Add to Gemfile in each rails app:
-
-    group :development, :test do
-      gem 'awesome_print'
-    end
-
-Try it in rails console:
-    $ ap { :a => 1, :b => 2 }
-
-Nice console prompt, logging to console, console indenting
-
-Setup your ~.irbrc to look like:
+For a nice console prompt, logging to console, console indenting, setup your ~.irbrc to look like:
 
     %w{rubygems}.each do |lib| 
       begin 
@@ -137,26 +144,6 @@ Setup your ~.irbrc to look like:
         ActiveRecord::Base.instance_eval { alias :[] :find }
       end
     end
-
-
-### Install Textmate Bundles
-
-    $ mkdir -p ~/Library/Application\ Support/TextMate/Bundles/
-    $ cd ~/Library/Application\ Support/TextMate/Bundles/
-
-Install rspec textmate bundle:
-
-    $ git clone git://github.com/rspec/rspec-tmbundle.git RSpec.tmbundle
-
-Install Haml textmate bundle:
-    
-    $ git clone git://github.com/phuibonhoa/handcrafted-haml-textmate-bundle.git Haml.tmbundle
-
-Install cucumber bundle:
-
-    $ git clone git://github.com/aslakhellesoy/cucumber-tmbundle.git Cucumber.tmbundle
-    
-Bundles > Bundle Editor > Reload Bundles, in TextMate.
     
 ### Install Autotest and Spork for fast, continuous testing
 
