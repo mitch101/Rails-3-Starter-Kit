@@ -1,4 +1,4 @@
-# Setup the perfect ruby on rails rpp from scratch
+# Get Setup for Ruby on Rails from Scratch
 
 ## Assumptions
 
