@@ -57,6 +57,7 @@ Reload your ~/.profile:
 
 template.rb will create an app with the following features:
 
+* The Blueprint-CSS template with css reset, default styles, print styles, and IE stylesheet.
 * rspec with generators working
 * factory_girl with generators working loaded in rspec
 * jquery replacing prototype and included in the default layout
@@ -181,7 +182,6 @@ jquery-ui css is hosted at:
 
 ## TODos
 
-* Add flutie in the template for nice stylesheets out of the box.
 * Add essential bookmarks to the optional section of this readme. (capybara doc, apidock, railscasts...)
 * Write-up tmbundle installs (include cucumber highlighting and running)
 * Make sure fg works in cucumber, check out and doc cuc steps from fg.

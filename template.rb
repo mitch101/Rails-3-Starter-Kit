@@ -1,6 +1,8 @@
 # Create a new rails app using:
 # => rails new [app] -J -T -m /path/to/this/file
 
+@template_path = "#{File.dirname(__FILE__)}"
+
 #--------------------------
 # BASIC GEMS
 #--------------------------
@@ -42,11 +44,15 @@ layout = <<-LAYOUT
 %html
   %head
     %title #{app_name.humanize}
-    = stylesheet_link_tag :all
+    = stylesheet_link_tag 'blueprint-css-1.0/screen.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'blueprint-css-1.0/print.css', :media => 'print'
+    /[if IE]
+      = stylesheet_link_tag 'blueprint-css-1.0/ie.css', :media => 'screen, projection'
     = javascript_include_tag :defaults
     = csrf_meta_tag
   %body
-    = yield
+    .container
+      = yield
 LAYOUT
 remove_file "app/views/layouts/application.html.erb"
 create_file "app/views/layouts/application.html.haml", layout
@@ -100,6 +106,13 @@ DATABASE
   rake "db:create:all"
 end
 
+#--------------------------
+# BLUEPRINT-CSS
+#--------------------------
+if yes?("\r\nInstall with blueprint-css v1.0?")
+  run "cp -r #{@template_path}/blueprint-css-1.0 public/stylesheets"
+end
+  
 rake "db:migrate"
 
 #--------------------------
