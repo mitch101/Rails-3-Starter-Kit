@@ -73,6 +73,7 @@ template.rb will create an app with the following features:
 * a good .gitignore file
 * initalize and commit a git repository
 * clean up of some unused rails files.
+* Metrical for runs metrics on code quality.
 
 Create a new app by running:
 
@@ -186,7 +187,6 @@ jquery-ui css is hosted at:
 * Write-up tmbundle installs (include cucumber highlighting and running)
 * Make sure fg works in cucumber, check out and doc cuc steps from fg.
 * Write helper file including writing up websteps from capy, and fg s.t we write tests quickly, and other essential things.
-* Add rcov and other coding standards metrics and write how to use them.
-* Write a basic every day commands list so we're all using all the power here.
+* Write a basic every day commands list so we're all using all the power here. / How to use the app.
 
 

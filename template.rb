@@ -6,12 +6,13 @@
 #--------------------------
 # BASIC GEMS
 #--------------------------
-gem "rspec-rails", :group => [:development, :test]
-gem "ruby-debug"
-gem "awesome_print"
-gem "annotate-models"
-gem 'cucumber-rails'
-gem 'capybara'
+gem "ruby-debug", :group => [:development, :test]
+gem "awesome_print", :group => [:development, :test]
+gem "rspec-rails", :group => :test
+gem 'cucumber-rails', :group => :test
+gem 'capybara', :group => :test
+gem "annotate-models", :group => :development
+gem 'metrical', :group => :development
 
 #--------------------------
 # FACTORY_GIRL
@@ -66,6 +67,11 @@ generate 'rspec:install'
 generate 'cucumber:install'
 
 #--------------------------
+# BLUEPRINT-CSS
+#--------------------------
+run "cp -r #{@template_path}/blueprint-css-1.0 public/stylesheets"
+
+#--------------------------
 # POSTGRES
 #--------------------------
 # Note: pg gem causes trouble with rspec install
@@ -104,13 +110,6 @@ DATABASE
   run 'bundle install'
   # Create databases
   rake "db:create:all"
-end
-
-#--------------------------
-# BLUEPRINT-CSS
-#--------------------------
-if yes?("\r\nInstall with blueprint-css v1.0?")
-  run "cp -r #{@template_path}/blueprint-css-1.0 public/stylesheets"
 end
   
 rake "db:migrate"
