@@ -138,14 +138,23 @@ Setup your ~.irbrc to look like:
 
 ### Install Textmate Bundles
 
-Install rspec textmate bundle (for syntax highlighting and running of an open test file in tm using cmd-r with a nice html output). Follow the instuctions [here](http://rspec.info/documentation/tools/extensions/editors/textmate.html), or [here](http://stackoverflow.com/questions/3532538/installing-rspec-bundle-for-textmate)
+    $ mkdir -p ~/Library/Application\ Support/TextMate/Bundles/
+    $ cd ~/Library/Application\ Support/TextMate/Bundles/
 
-Install Haml textmate bundle...?
+Install rspec textmate bundle:
 
-Install cucumber bundle...?
+    $ git clone git://github.com/rspec/rspec-tmbundle.git RSpec.tmbundle
 
-I'll document these soon.
+Install Haml textmate bundle:
+    
+    $ git clone git://github.com/phuibonhoa/handcrafted-haml-textmate-bundle.git Haml.tmbundle
 
+Install cucumber bundle:
+
+    $ git clone git://github.com/aslakhellesoy/cucumber-tmbundle.git Cucumber.tmbundle
+    
+Bundles > Bundle Editor > Reload Bundles, in TextMate.
+    
 ### Install Autotest and Spork for fast, continuous testing
 
 First, make sure you have growl installed and running on login.
@@ -178,7 +187,7 @@ and add script tags to load the desired libraries. Remove :defaults, and add the
 
 jquery-ui css is hosted at:
       
-      http://ajax.googleapis.com/ajax/libs/jqueryui/[UI.VERSION]/themes/[THEME-NAME]/jquery-ui.css
+    http://ajax.googleapis.com/ajax/libs/jqueryui/[UI.VERSION]/themes/[THEME-NAME]/jquery-ui.css
 
 
 ## TODos
