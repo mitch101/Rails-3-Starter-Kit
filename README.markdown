@@ -181,17 +181,22 @@ jquery-ui css is hosted at:
 
 ### Bookmark some essential pages
 
-* [Railscasts](railscasts.com)
 * [Rails Guides](http://guides.rubyonrails.org/) (Rails reference)
 * [RSpec Reference](http://relishapp.com/rspec/)
+* [Capybara Cheatsheet](http://richardconroy.blogspot.com/2010/08/capybara-reference.html), [original](https://gist.github.com/428105#file_capybara%20cheat%20sheet)
 * [Capybara Reference](https://github.com/jnicklas/capybara)
+* [Blueprint Cheatsheet](http://www.garethjmsaunders.co.uk/blueprint/downloads/blueprintcss-1-0-cheatsheet-4-2-gjms.pdf)
 * [Blueprint Examples](http://www.blueprintcss.org/tests/)
+* [Haml Reference](http://haml-lang.com/docs/yardoc/file.HAML_REFERENCE.html)
 * [API Dock](http://apidock.com/) (Rails, Ruby, RSpec documentation) 
+* [Railscasts](railscasts.com)
+* [Rails Best Practices](http://rails-bestpractices.com/)
+* [Factory Girl Documentation](http://rubydoc.info/gems/factory_girl/1.3.3/frames)
 
-## TODos
+## TODOs
 
-* Add essential bookmarks to the optional section of this readme. (capybara doc, apidock, railscasts...)
-* Make sure fg works in cucumber, check out and doc cuc steps from fg.
-* Write helper file including writing up websteps from capy, and fg s.t we write tests quickly, and other essential things.
+* Document spork install
+* Make sure fg works in cucumber
+* Add fiveruns dev toolbar
 
 
