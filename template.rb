@@ -10,6 +10,7 @@ gem "ruby-debug", :group => [:development, :test]
 gem "awesome_print", :group => [:development, :test]
 gem "rspec-rails", :group => :test
 gem 'cucumber-rails', :group => :test
+gem 'database_cleaner', :group => :test
 gem 'capybara', :group => :test
 gem "annotate-models", :group => :development
 gem 'metrical', :group => :development
