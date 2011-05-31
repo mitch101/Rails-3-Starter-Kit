@@ -33,9 +33,9 @@ application generators
 #--------------------------
 # JQUERY
 #--------------------------
-gem "jquery-rails"
+gem "jquery-rails", "1.0.9"
 # Set the :defaults in javascript tags to load jquery
-gsub_file 'config/application.rb', 'config.action_view.javascript_expansions[:defaults] = %w()', 'config.action_view.javascript_expansions[:defaults] = %w(jquery.js rails.js)'
+gsub_file 'config/application.rb', 'config.action_view.javascript_expansions[:defaults] = %w()', 'config.action_view.javascript_expansions[:defaults] = %w(jquery.js jquery_ujs.js)'
 
 #--------------------------
 # HAML
