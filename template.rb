@@ -14,6 +14,7 @@ gem 'database_cleaner', :group => :test
 gem 'capybara', "0.4.1.2", :group => :test
 gem "annotate-models", :group => :development
 gem 'metrical', :group => :development
+gem 'rake', "0.8.7"
 
 #--------------------------
 # FACTORY_GIRL
