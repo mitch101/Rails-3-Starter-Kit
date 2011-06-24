@@ -198,5 +198,3 @@ jquery-ui css is hosted at:
 * Document spork install
 * Add fiveruns dev toolbar
 * Add rails optimization gem from rails lab vids
-
-## master
