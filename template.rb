@@ -21,6 +21,7 @@ gem 'rake', "0.8.7"
 gem "rails3-generators", :group => [:development, :test]
 gem "factory_girl_rails", "1.0.1", :group => [:development, :test]
 gem "haml-rails", ">= 0.3.4"
+gem "compass", ">= 0.11.3"
 
 #--------------------------
 # Configure generators
@@ -28,18 +29,19 @@ gem "haml-rails", ">= 0.3.4"
 
 # Don't generate stylesheets when scaffolding.
 # Generate factories using the rails3-generator for factory-girl.
-# Don't generate specs for views, controllers, helpers, or routes in scaffolding.
+# Don't generate specs for views, controllers, helpers, requests, or routes in scaffolding.
 
 generators = <<-GENERATORS
 
     config.generators do |g|
       g.stylesheets false
       g.template_engine :haml
-      g.test_framework :rspec,
+      g.test_framework :rspec
       g.view_specs false
       g.controller_specs false
       g.helper_specs false
       g.routing_specs false
+      g.request_specs false
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
 GENERATORS
@@ -57,16 +59,15 @@ layout = <<-LAYOUT
 !!!
 %html
   %head
-    %title #{app_name.humanize}
-    = stylesheet_link_tag 'blueprint-css-1.0/screen.css', :media => 'screen, projection'
-    = stylesheet_link_tag 'blueprint-css-1.0/print.css', :media => 'print'
-    /[if lt IE 8]
-      = stylesheet_link_tag 'blueprint-css-1.0/ie.css', :media => 'screen, projection'
+    %title #{app_name.humanize}  
+    = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
+    = stylesheet_link_tag 'print.css', :media => 'print'
+    /[if IE]
+      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'          
     = javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js', 'underscore'
     = csrf_meta_tag
   %body
-    .container
-      = yield
+    = yield
 LAYOUT
 remove_file "app/views/layouts/application.html.erb"
 create_file "app/views/layouts/application.html.haml", layout
@@ -125,6 +126,11 @@ DATABASE
 end
   
 rake "db:migrate"
+
+#--------------------------
+# COMPASS / SASS
+#--------------------------
+run 'bundle exec compass init rails .'
 
 #--------------------------
 # CLEANUP
