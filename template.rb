@@ -15,17 +15,26 @@ gem 'capybara', "0.4.1.2", :group => :test
 gem "annotate-models", :group => :development
 gem 'metrical', :group => :development
 gem 'rake', "0.8.7"
-
-#--------------------------
-# FACTORY_GIRL
-#--------------------------
 gem "rails3-generators", :group => [:development, :test]
 gem "factory_girl_rails", "1.0.1", :group => [:development, :test]
+
+#--------------------------
+# Configure generators
+#--------------------------
+
+# Don't generate stylesheets when scaffolding.
 # Generate factories using the rails3-generator for factory-girl.
+# Don't generate specs for views, controllers, helpers, or routes in scaffolding.
+
 generators = <<-GENERATORS
 
     config.generators do |g|
+      g.stylesheets false
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
+      g.controller-specs false
+      g.view-specs false
+      g.helper-specs false
+      g.routing-specs false
     end
 GENERATORS
 application generators
@@ -36,6 +45,11 @@ application generators
 gem "jquery-rails", "1.0.9"
 # Set the :defaults in javascript tags to load jquery
 gsub_file 'config/application.rb', 'config.action_view.javascript_expansions[:defaults] = %w()', 'config.action_view.javascript_expansions[:defaults] = %w(jquery.js jquery_ujs.js)'
+
+#--------------------------
+# Underscore.js
+#--------------------------
+run "cp -r #{@template_path}/underscore-min.js public/javascripts"
 
 #--------------------------
 # HAML
