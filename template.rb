@@ -4,7 +4,7 @@
 # For templating commands, see thor docs: http://rdoc.info/github/wycats/thor/master/Thor/Actions#copy_file-instance_method
 # and rails specific templating commands at: http://edgeguides.rubyonrails.org/generators.html#generator-methods
 
-@template_path = "https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/"
+@template_path = "https://raw.github.com/mitch101/Rails-3-Starter-Kit/master"
 
 #--------------------------
 # BASIC GEMS
@@ -35,7 +35,11 @@ generators = <<-GENERATORS
     config.generators do |g|
       g.stylesheets false
       g.template_engine :haml
-      g.test_framework :rspec, :fixture => true, :views => false, :controllers => false, :helpers => false, :routing => false
+      g.test_framework :rspec,
+      g.view_specs false
+      g.controller_specs false
+      g.helper_specs false
+      g.routing_specs false
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
 GENERATORS
@@ -70,19 +74,14 @@ create_file "app/views/layouts/application.html.haml", layout
 #--------------------------
 # INSTALL GEMS
 #--------------------------
-run 'bundle install'
+# run 'bundle install'
 generate 'rspec:install'
 generate 'cucumber:install'
 
 #--------------------------
 # Underscore.js
 #--------------------------
-get "#{@template_path}/underscore-min.js" "public/javascripts"
-
-#--------------------------
-# BLUEPRINT-CSS
-#--------------------------
-get "#{@template_path}/blueprint-css-1.0 public/stylesheets"
+get "#{@template_path}/underscore-min.js", "public/javascripts/underscore-min.js"
 
 #--------------------------
 # POSTGRES
