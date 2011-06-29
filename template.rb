@@ -17,6 +17,7 @@ gem 'metrical', :group => :development
 gem 'rake', "0.8.7"
 gem "rails3-generators", :group => [:development, :test]
 gem "factory_girl_rails", "1.0.1", :group => [:development, :test]
+gem "haml-rails", ">= 0.3.4"
 
 #--------------------------
 # Configure generators
@@ -40,22 +41,13 @@ GENERATORS
 application generators
 
 #--------------------------
-# JQUERY
+# Customize default haml application layout
 #--------------------------
-gem "jquery-rails", "1.0.9"
-# Set the :defaults in javascript tags to load jquery
-gsub_file 'config/application.rb', 'config.action_view.javascript_expansions[:defaults] = %w()', 'config.action_view.javascript_expansions[:defaults] = %w(jquery.js jquery_ujs.js)'
 
-#--------------------------
-# Underscore.js
-#--------------------------
-run "cp -r #{@template_path}/underscore-min.js public/javascripts"
-
-#--------------------------
-# HAML
-#--------------------------
-gem "haml-rails", ">= 0.3.4"
 # Replace the erb application layout with haml one.
+# Include jquery hosted by google.
+# Include underscore.js.
+
 layout = <<-LAYOUT
 !!!
 %html
@@ -65,7 +57,7 @@ layout = <<-LAYOUT
     = stylesheet_link_tag 'blueprint-css-1.0/print.css', :media => 'print'
     /[if lt IE 8]
       = stylesheet_link_tag 'blueprint-css-1.0/ie.css', :media => 'screen, projection'
-    = javascript_include_tag :defaults
+    = javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js', 'underscore'
     = csrf_meta_tag
   %body
     .container
@@ -81,6 +73,11 @@ run 'bundle install'
 generate 'jquery:install'
 generate 'rspec:install'
 generate 'cucumber:install'
+
+#--------------------------
+# Underscore.js
+#--------------------------
+run "cp -r #{@template_path}/underscore-min.js public/javascripts"
 
 #--------------------------
 # BLUEPRINT-CSS
