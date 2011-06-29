@@ -1,7 +1,10 @@
 # Create a new rails app using:
-# => rails new [app] -J -T -m /path/to/this/file
+# => rails new [app] -J -T -m https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template.rb
 
-@template_path = "#{File.dirname(__FILE__)}"
+# For templating commands, see thor docs: http://rdoc.info/github/wycats/thor/master/Thor/Actions#copy_file-instance_method
+# and rails specific templating commands at: http://edgeguides.rubyonrails.org/generators.html#generator-methods
+
+@template_path = "https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/"
 
 #--------------------------
 # BASIC GEMS
@@ -31,11 +34,9 @@ generators = <<-GENERATORS
 
     config.generators do |g|
       g.stylesheets false
+      g.template_engine :haml
+      g.test_framework :rspec, :fixture => true, :views => false, :controllers => false, :helpers => false, :routing => false
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
-      g.controller-specs false
-      g.view-specs false
-      g.helper-specs false
-      g.routing-specs false
     end
 GENERATORS
 application generators
@@ -70,19 +71,18 @@ create_file "app/views/layouts/application.html.haml", layout
 # INSTALL GEMS
 #--------------------------
 run 'bundle install'
-generate 'jquery:install'
 generate 'rspec:install'
 generate 'cucumber:install'
 
 #--------------------------
 # Underscore.js
 #--------------------------
-run "cp -r #{@template_path}/underscore-min.js public/javascripts"
+get "#{@template_path}/underscore-min.js" "public/javascripts"
 
 #--------------------------
 # BLUEPRINT-CSS
 #--------------------------
-run "cp -r #{@template_path}/blueprint-css-1.0 public/stylesheets"
+get "#{@template_path}/blueprint-css-1.0 public/stylesheets"
 
 #--------------------------
 # POSTGRES
