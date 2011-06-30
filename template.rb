@@ -131,7 +131,15 @@ rake "db:migrate"
 # COMPASS / SASS / Blueprint
 #--------------------------
 run 'bundle exec compass init rails .'
+remove_file 'app/stylesheets/ie.scss'
+get "#{@template_path}/ie.scss", "app/stylesheets/ie.scss"
+remove_file 'app/stylesheets/print.scss'
+get "#{@template_path}/print.scss", "app/stylesheets/print.scss"
+remove_file 'app/stylesheets/screen.scss'
+get "#{@template_path}/application.scss", "app/stylesheets/application.scss"
 
+empty_directory 'app/stylesheets/partials'
+get "#{@template_path}/_base.scss", "app/stylesheets/partials/_base.scss"
 
 
 #--------------------------
