@@ -55,20 +55,6 @@ application generators
 # Include jquery hosted by google.
 # Include underscore.js.
 
-layout = <<-LAYOUT
-!!!
-%html
-  %head
-    %title #{app_name.humanize}  
-    = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
-    = stylesheet_link_tag 'print.css', :media => 'print'
-    /[if lt IE 8]
-      = stylesheet_link_tag 'ie.css', :media => 'screen, projection'          
-    = javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js', 'underscore-min'
-    = csrf_meta_tag
-  %body
-    = yield
-LAYOUT
 remove_file "app/views/layouts/application.html.erb"
 get "#{@template_path}/application.html.haml", "app/views/layouts/application.html.haml"
 
@@ -130,17 +116,22 @@ rake "db:migrate"
 #--------------------------
 # COMPASS / SASS / Blueprint
 #--------------------------
+
+# Install compass
 run 'bundle exec compass init rails .'
+
+# Configure application to include blueprint.
 remove_file 'app/stylesheets/ie.scss'
 get "#{@template_path}/ie.scss", "app/stylesheets/ie.scss"
 remove_file 'app/stylesheets/print.scss'
 get "#{@template_path}/print.scss", "app/stylesheets/print.scss"
 remove_file 'app/stylesheets/screen.scss'
 get "#{@template_path}/application.scss", "app/stylesheets/application.scss"
-
 empty_directory 'app/stylesheets/partials'
 get "#{@template_path}/_base.scss", "app/stylesheets/partials/_base.scss"
 
+# Include a styleguide accessible at /styleguide.html
+get "#{@template_path}/styleguide.html", "public/styleguide.html"
 
 #--------------------------
 # CLEANUP
@@ -153,17 +144,8 @@ remove_file 'public/images/rails.png'
 #--------------------------
 # Create a standard .gitignore file.
 remove_file ".gitignore"
-create_file '.gitignore', <<-FILE
-.DS_Store
-log/*.log
-tmp/**/*
-config/database.yml
-db/*.sqlite3
-public/uploads/*
-gems/*
-!gems/cache
-!gems/bundler
-FILE
+get "#{@template_path}/app_gitignore", ".gitignore"
+
 # Initialize a git repository.
 git :init
 git :submodule => "init"
