@@ -17,7 +17,7 @@ gem 'database_cleaner', :group => :test
 gem 'capybara', "0.4.1.2", :group => :test
 gem "annotate-models", :group => :development
 gem 'metrical', :group => :development
-gem 'rake', "0.8.7"
+#gem 'rake', "0.8.7" # There was a bug in 1.9 rake with rails, however forcing version here makes you use bundle exec rake, which isn't nice.
 gem "rails3-generators", :group => [:development, :test]
 gem "factory_girl_rails", "1.0.1", :group => [:development, :test]
 gem "haml-rails", ">= 0.3.4"
@@ -62,15 +62,15 @@ layout = <<-LAYOUT
     %title #{app_name.humanize}  
     = stylesheet_link_tag 'screen.css', :media => 'screen, projection'
     = stylesheet_link_tag 'print.css', :media => 'print'
-    /[if IE]
+    /[if lt IE 8]
       = stylesheet_link_tag 'ie.css', :media => 'screen, projection'          
-    = javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js', 'underscore'
+    = javascript_include_tag 'https://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js', 'underscore-min'
     = csrf_meta_tag
   %body
     = yield
 LAYOUT
 remove_file "app/views/layouts/application.html.erb"
-create_file "app/views/layouts/application.html.haml", layout
+get "#{@template_path}/application.html.haml", "app/views/layouts/application.html.haml"
 
 #--------------------------
 # INSTALL GEMS
@@ -128,9 +128,11 @@ end
 rake "db:migrate"
 
 #--------------------------
-# COMPASS / SASS
+# COMPASS / SASS / Blueprint
 #--------------------------
 run 'bundle exec compass init rails .'
+
+
 
 #--------------------------
 # CLEANUP
