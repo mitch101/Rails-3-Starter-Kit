@@ -1,5 +1,5 @@
 # Create a new rails app using:
-# => rails new [app] -J -T -m https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template.rb
+# => rails new [app] -m https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template.rb
 
 # For templating commands, see thor docs: http://rdoc.info/github/wycats/thor/master/Thor/Actions#copy_file-instance_method
 # and rails specific templating commands at: http://edgeguides.rubyonrails.org/generators.html#generator-methods
@@ -24,9 +24,24 @@ gem "haml-rails", ">= 0.3.4"
 gem "compass", ">= 0.11.3"
 
 #--------------------------
+# Remove prototype
+#--------------------------
+# remove the Prototype adapter file
+remove_file 'public/javascripts/rails.js'
+# remove the Prototype files (if they exist)
+remove_file 'public/javascripts/controls.js'
+remove_file 'public/javascripts/dragdrop.js'
+remove_file 'public/javascripts/effects.js'
+remove_file 'public/javascripts/prototype.js'
+
+#--------------------------
+# Remove test unit
+#--------------------------
+remove_dir 'test'
+
+#--------------------------
 # Configure generators
 #--------------------------
-
 # Don't generate stylesheets when scaffolding.
 # Generate factories using the rails3-generator for factory-girl.
 # Don't generate specs for views, controllers, helpers, requests, or routes in scaffolding.
