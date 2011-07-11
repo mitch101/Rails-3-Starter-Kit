@@ -1,5 +1,1 @@
-- Looks like app_name isn't working in the template, so we need to add it manually in database.yml, and application layout. Fix this. (Cause it's in a separate file!)
 - Rake task gives warning messages
-- Add git ignore of generated css files.
-- Add container to application layout.
-- Change loading screen.css to application.css in application layout
