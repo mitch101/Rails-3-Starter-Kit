@@ -1,7 +1,10 @@
 # Create a new rails app using:
-# => rails new [app] -J -T -m /path/to/this/file
+# => rails new [app] -m https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template.rb
 
-@template_path = "#{File.dirname(__FILE__)}"
+# For templating commands, see thor docs: http://rdoc.info/github/wycats/thor/master/Thor/Actions#copy_file-instance_method
+# and rails specific templating commands at: http://edgeguides.rubyonrails.org/generators.html#generator-methods
+
+@template_path = "https://raw.github.com/mitch101/Rails-3-Starter-Kit/master"
 
 #--------------------------
 # BASIC GEMS
@@ -14,64 +17,73 @@ gem 'database_cleaner', :group => :test
 gem 'capybara', "0.4.1.2", :group => :test
 gem "annotate-models", :group => :development
 gem 'metrical', :group => :development
-gem 'rake', "0.8.7"
-
-#--------------------------
-# FACTORY_GIRL
-#--------------------------
+#gem 'rake', "0.8.7" # There was a bug in 1.9 rake with rails, however forcing version here makes you use bundle exec rake, which isn't nice.
 gem "rails3-generators", :group => [:development, :test]
 gem "factory_girl_rails", "1.0.1", :group => [:development, :test]
+gem "haml-rails", ">= 0.3.4"
+gem "compass", ">= 0.11.3"
+
+#--------------------------
+# Remove prototype
+#--------------------------
+# remove the Prototype adapter file
+remove_file 'public/javascripts/rails.js'
+# remove the Prototype files (if they exist)
+remove_file 'public/javascripts/controls.js'
+remove_file 'public/javascripts/dragdrop.js'
+remove_file 'public/javascripts/effects.js'
+remove_file 'public/javascripts/prototype.js'
+
+#--------------------------
+# Remove test unit
+#--------------------------
+remove_dir 'test'
+
+#--------------------------
+# Configure generators
+#--------------------------
+# Don't generate stylesheets when scaffolding.
 # Generate factories using the rails3-generator for factory-girl.
+# Don't generate specs for views, controllers, helpers, requests, or routes in scaffolding.
+
 generators = <<-GENERATORS
 
     config.generators do |g|
+      g.stylesheets false
+      g.template_engine :haml
+      g.test_framework :rspec
+      g.view_specs false
+      g.controller_specs false
+      g.helper_specs false
+      g.routing_specs false
+      g.request_specs false
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
 GENERATORS
 application generators
 
 #--------------------------
-# JQUERY
+# Customize default haml application layout
 #--------------------------
-gem "jquery-rails", "1.0.9"
-# Set the :defaults in javascript tags to load jquery
-gsub_file 'config/application.rb', 'config.action_view.javascript_expansions[:defaults] = %w()', 'config.action_view.javascript_expansions[:defaults] = %w(jquery.js jquery_ujs.js)'
 
-#--------------------------
-# HAML
-#--------------------------
-gem "haml-rails", ">= 0.3.4"
 # Replace the erb application layout with haml one.
-layout = <<-LAYOUT
-!!!
-%html
-  %head
-    %title #{app_name.humanize}
-    = stylesheet_link_tag 'blueprint-css-1.0/screen.css', :media => 'screen, projection'
-    = stylesheet_link_tag 'blueprint-css-1.0/print.css', :media => 'print'
-    /[if lt IE 8]
-      = stylesheet_link_tag 'blueprint-css-1.0/ie.css', :media => 'screen, projection'
-    = javascript_include_tag :defaults
-    = csrf_meta_tag
-  %body
-    .container
-      = yield
-LAYOUT
+# Include jquery hosted by google.
+# Include underscore.js.
+
 remove_file "app/views/layouts/application.html.erb"
-create_file "app/views/layouts/application.html.haml", layout
+get "#{@template_path}/application.html.haml", "app/views/layouts/application.html.haml"
 
 #--------------------------
 # INSTALL GEMS
 #--------------------------
-run 'bundle install'
-generate 'jquery:install'
+# run 'bundle install'
 generate 'rspec:install'
 generate 'cucumber:install'
 
 #--------------------------
-# BLUEPRINT-CSS
+# Underscore.js
 #--------------------------
-run "cp -r #{@template_path}/blueprint-css-1.0 public/stylesheets"
+get "#{@template_path}/underscore-min.js", "public/javascripts/underscore-min.js"
 
 #--------------------------
 # POSTGRES
@@ -117,6 +129,26 @@ end
 rake "db:migrate"
 
 #--------------------------
+# COMPASS / SASS / Blueprint
+#--------------------------
+
+# Install compass
+run 'bundle exec compass init rails .'
+
+# Configure application to include blueprint.
+remove_file 'app/stylesheets/ie.scss'
+get "#{@template_path}/ie.scss", "app/stylesheets/ie.scss"
+remove_file 'app/stylesheets/print.scss'
+get "#{@template_path}/print.scss", "app/stylesheets/print.scss"
+remove_file 'app/stylesheets/screen.scss'
+get "#{@template_path}/application.scss", "app/stylesheets/application.scss"
+empty_directory 'app/stylesheets/partials'
+get "#{@template_path}/_base.scss", "app/stylesheets/partials/_base.scss"
+
+# Include a styleguide accessible at /styleguide.html
+get "#{@template_path}/styleguide.html", "public/styleguide.html"
+
+#--------------------------
 # CLEANUP
 #--------------------------
 remove_file 'public/index.html'
@@ -127,17 +159,8 @@ remove_file 'public/images/rails.png'
 #--------------------------
 # Create a standard .gitignore file.
 remove_file ".gitignore"
-create_file '.gitignore', <<-FILE
-.DS_Store
-log/*.log
-tmp/**/*
-config/database.yml
-db/*.sqlite3
-public/uploads/*
-gems/*
-!gems/cache
-!gems/bundler
-FILE
+get "#{@template_path}/app_gitignore", ".gitignore"
+
 # Initialize a git repository.
 git :init
 git :submodule => "init"
