@@ -94,31 +94,10 @@ if yes?("\r\nInstall with postgres?")
   # Create a database.yml for postgres
   postgres_pass = ask("\r\nEnter your postgres password:")
   remove_file "config/database.yml"
-  create_file "config/database.yml", <<-DATABASE
-development:
-  adapter: postgresql
-  encoding: unicode
-  database: #{app_name}_development
-  pool: 5
-  username: postgres
-  password: #{postgres_pass}
+  get "#{@template_path}/database.yml", "config/database.yml"
+  gsub_file 'config/database.yml', '[app_name]',"#{app_name}"
+  gsub_file 'config/database.yml', '[postgres_pass]',"#{postgres_pass}" 
 
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: #{app_name}_test
-  pool: 5
-  username: postgres
-  password: #{postgres_pass}
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: #{app_name}_production
-  pool: 5
-  username: postgres
-  password: #{postgres_pass}
-DATABASE
   # Install pg gem.
   gem 'pg'
   run 'bundle install'
