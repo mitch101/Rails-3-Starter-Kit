@@ -42,9 +42,9 @@ Make gem install not compile rdoc or ri, add the following to ~/.gemrc:
 
 ## Install Postgres  
 
-Get the [one click installer](http://www.postgresql.org/download/macosx) (> v 9.0.3), and run the app inside the dmg. (Note: I had to restart my system and re-run the installer). Use the default settings, set the password to postgres. Don't run stack builder at the end.
+Get the [one click installer](http://www.postgresql.org/download/macosx) (> v 9.0.3), and run the app inside the dmg. (Note: I had to restart my system and re-run the installer). Use the default settings, set the password to suite101. Don't run stack builder at the end.
 
-Add the following to your ~/.profile:
+Add the following to your ~/.profile (or ~/.bashrc):
 
     # Add Postgres binaries to the path
     export PATH=$PATH:/Library/PostgreSQL/9.0/bin
@@ -68,7 +68,7 @@ Install Haml textmate bundle:
 
 Install cucumber bundle:
 
-    $ git clone git://github.com/aslakhellesoy/cucumber-tmbundle.git Cucumber.tmbundle
+    $ git clone https://github.com/drnic/cucumber-tmbundle Cucumber.tmbundle
 
 Bundles > Bundle Editor > Reload Bundles, in TextMate.
 
@@ -80,17 +80,14 @@ Create a new app by cloning this repository, and running:
     
 Your new app has the following features.
 
-* **Blueprint-CSS:** css reset, default styles, print styles, IE stylesheet, grid system, included in default layout
 * **RSpec:** generators working
 * **factory_girl:** generators working, loaded in rspec
-* **jQuery:** replacing prototype, included in the default layout
+* **jQuery:** replacing prototype, included in the default layout, loaded from google
 * **Haml:** generators working, replacing default layout with a haml layout.
+* **Compass:** look at styleguides.html and application.html.haml to see how to use it.
 * **postgres:** (optional) configured with provided password
 * **cucumber and capybara:** for integration testing
 * **ruby debug**
-* **awesome_print**
-* **Metrical** for running metrics on code quality
-* **annotate-models**
 
 The template also generates a good .gitignore file, initializes an empty git repository, and cleans up some unnecessary rails files.
 
@@ -99,9 +96,6 @@ No additional setup tasks required.
 ## Tips for using your new rails application
     
 * Debug your app by adding *debugger* in your code. Use *rails s --debug* to debug in server. Type *help* in debugger to learn commands.
-* Use *ap* to print awesomely in the console.
-* Annotate your models by running *annotate* at any time.
-* Generate code quality metrics by running *metrical*.
 * Run individual specs or feature files in textmate by typing: *cmd-r*.
     
 ## Bonus Setup
@@ -167,36 +161,12 @@ It will watch for changes to specs and source code of all your apps and run any 
 Install spork to increase your test speed. Follow the instructions [here](
 http://www.rubyinside.com/how-to-rails-3-and-rspec-2-4336.html).
 
-### Load jQuery and jQuery-UI from google
-
-See: 
-
-    http://code.google.com/apis/libraries/devguide.html 
-
-and add script tags to load the desired libraries. Remove :defaults, and add the scripts you want to load manually.
-
-jquery-ui css is hosted at:
-      
-    http://ajax.googleapis.com/ajax/libs/jqueryui/[UI.VERSION]/themes/[THEME-NAME]/jquery-ui.css
-
-### Bookmark some essential pages
-
-* [Rails Guides](http://guides.rubyonrails.org/) (Rails reference)
-* [RSpec Reference](http://relishapp.com/rspec/)
-* [Capybara Cheatsheet](http://richardconroy.blogspot.com/2010/08/capybara-reference.html), [original](https://gist.github.com/428105#file_capybara%20cheat%20sheet)
-* [Capybara Reference](https://github.com/jnicklas/capybara)
-* [Blueprint Cheatsheet](http://www.garethjmsaunders.co.uk/blueprint/downloads/blueprintcss-1-0-cheatsheet-4-2-gjms.pdf)
-* [Blueprint Examples](http://www.blueprintcss.org/tests/)
-* [Haml Reference](http://haml-lang.com/docs/yardoc/file.HAML_REFERENCE.html)
-* [API Dock](http://apidock.com/) (Rails, Ruby, RSpec documentation) 
-* [Railscasts](railscasts.com)
-* [Rails Best Practices](http://rails-bestpractices.com/)
-* [Factory Girl Documentation](http://rubydoc.info/gems/factory_girl/1.3.3/frames)
-
 ## TODOs
 
 * Document spork install
 * Add fiveruns dev toolbar
 * Add rails optimization gem from rails lab vids
+* Fix rake versioning nightmare. Gives warnings and conflict.
+* Update rails and ruby versions
 
 
