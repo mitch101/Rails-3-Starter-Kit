@@ -77,6 +77,9 @@ get "#{@template_path}/application.html.haml", "app/views/layouts/application.ht
 # INSTALL GEMS
 #--------------------------
 # run 'bundle install'
+
+run 'bundle install'
+
 generate 'rspec:install'
 generate 'cucumber:install'
 
