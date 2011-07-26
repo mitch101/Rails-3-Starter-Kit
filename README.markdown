@@ -42,16 +42,16 @@ Make gem install not compile rdoc or ri, add the following to ~/.gemrc:
 
 ## Install Postgres  
 
-Get the [one click installer](http://www.postgresql.org/download/macosx) (> v 9.0.3), and run the app inside the dmg. (Note: I had to restart my system and re-run the installer). Use the default settings, set the password to suite101. Don't run stack builder at the end.
+Install with homebrew:
 
-Add the following to your ~/.profile (or ~/.bashrc):
+    brew update
+    brew install postgres
 
-    # Add Postgres binaries to the path
-    export PATH=$PATH:/Library/PostgreSQL/9.0/bin
+    initdb /usr/local/var/postgres
+    
 
-Reload your ~/.profile:
-
-    $ source ~/.profile
+For more detailed instructions on this setup, see: https://willj.net/2011/05/31/setting-up-postgresql-for-ruby-on-rails-development-on-os-x/
+http://russbrooks.com/2010/11/25/install-postgresql-9-on-os-x
 
 ## Install Textmate Bundles
 
@@ -141,22 +141,26 @@ For a nice console prompt, logging to console, console indenting, setup your ~.i
     
 ### Install Autotest and Spork for fast, continuous testing
 
-First, make sure you have growl installed and running on login.
+Install growl from http://growl.info/ and set it to start at login.
 
-    $ gem install autotest-standalone
-    $ gem install autotest-fsevent
-    $ gem install autotest-growl
+Install autotest gems.
 
-Setup autotest to use fsevent and growl. Create ~/.autotest with:
+    gem install autotest-standalone
+    gem install autotest-fsevent
+    gem install autotest-growl
+
+Setup autotest to use fsevent and growl---create ~/.autotest with:
+  	
   	require 'autotest/fsevent'
   	require 'autotest/growl'
 
-Make sure you have growl configured to accept the autotest application.
+Setup autotest to run cucumber---add the following to your ~/.profile:
+    
+    export AUTOFEATURE=true
 
-Run autotest:
-    $ autotest
-
-It will watch for changes to specs and source code of all your apps and run any required tests.
+Run autotest in your root project directory:
+    
+    autotest
 
 Install spork to increase your test speed. Follow the instructions [here](
 http://www.rubyinside.com/how-to-rails-3-and-rspec-2-4336.html).
