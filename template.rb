@@ -10,13 +10,13 @@
 # BASIC GEMS
 #--------------------------
 gem "ruby-debug", :group => [:development, :test]
-gem "awesome_print", :group => [:development, :test]
+#gem "awesome_print", :group => [:development, :test]
 gem "rspec-rails", "2.5.0", :group => [:development, :test]
 gem 'cucumber-rails', "0.4.0", :group => :test
 gem 'database_cleaner', :group => :test
 gem 'capybara', "0.4.1.2", :group => :test
-gem "annotate-models", :group => :development
-gem 'metrical', :group => :development
+#gem "annotate-models", :group => :development
+#gem 'metrical', :group => :development
 #gem 'rake', "0.8.7" # There was a bug in 1.9 rake with rails, however forcing version here makes you use bundle exec rake, which isn't nice.
 gem "rails3-generators", :group => [:development, :test]
 gem "factory_girl_rails", "1.0.1", :group => [:development, :test]
@@ -77,6 +77,9 @@ get "#{@template_path}/application.html.haml", "app/views/layouts/application.ht
 # INSTALL GEMS
 #--------------------------
 # run 'bundle install'
+
+run 'bundle install'
+
 generate 'rspec:install'
 generate 'cucumber:install'
 
@@ -94,31 +97,10 @@ if yes?("\r\nInstall with postgres?")
   # Create a database.yml for postgres
   postgres_pass = ask("\r\nEnter your postgres password:")
   remove_file "config/database.yml"
-  create_file "config/database.yml", <<-DATABASE
-development:
-  adapter: postgresql
-  encoding: unicode
-  database: #{app_name}_development
-  pool: 5
-  username: postgres
-  password: #{postgres_pass}
+  get "#{@template_path}/database.yml", "config/database.yml"
+  gsub_file 'config/database.yml', '[app_name]',"#{app_name}"
+  gsub_file 'config/database.yml', '[postgres_pass]',"#{postgres_pass}" 
 
-test:
-  adapter: postgresql
-  encoding: unicode
-  database: #{app_name}_test
-  pool: 5
-  username: postgres
-  password: #{postgres_pass}
-
-production:
-  adapter: postgresql
-  encoding: unicode
-  database: #{app_name}_production
-  pool: 5
-  username: postgres
-  password: #{postgres_pass}
-DATABASE
   # Install pg gem.
   gem 'pg'
   run 'bundle install'
