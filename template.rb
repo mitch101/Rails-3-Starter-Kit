@@ -44,35 +44,37 @@ application generators
 # gsub_file '.rvmrc', '[ruby_gemset_name]', "#{RUBY_GEMSET_NAME}"
 
 # REPLACE THE DEFAULT GEMFILE
-get_template_file "Gemfile"
+# get_template_file "Gemfile"
+# 
+# # CREATE HAML APPLICATION LAYOUT
+# #   Replace the erb application layout with haml one.
+# #   Include jquery hosted by google.
+# #   Include underscore.js hosted by cdnjs
+# #   Include compass generated css.
+# get_template_file "app/views/layouts/application.html.haml"
+# 
+# get_template_file ".gitignore"
+# 
+# # INSTALL COMPASS
+# # Create compass config file.
+# get_template_file "config/compass.rb"
+# # Setup default sass files.
+# get_template_file "app/stylesheets/ie.scss"
+# get_template_file "app/stylesheets/print.scss"
+# get_template_file "app/stylesheets/application.scss"
+# get_template_file "app/stylesheets/partials/_base.scss"
+# # Include a styleguide accessible at /styleguide.html
+# get_template_file "public/styleguide.html"
+# 
+# # CREATE GUARDFILE
+# get_template_file "Guardfile"
+# 
+# get_template_file ".rspec"
+# get_template_file "spec/spec_helper.rb"
+# get_template_file "features/support/env.rb"
+# get_template_file "config/cucumber.yml"
 
-# CREATE HAML APPLICATION LAYOUT
-#   Replace the erb application layout with haml one.
-#   Include jquery hosted by google.
-#   Include underscore.js hosted by cdnjs
-#   Include compass generated css.
-get_template_file "app/views/layouts/application.html.haml"
-
-get_template_file ".gitignore"
-
-# INSTALL COMPASS
-# Create compass config file.
-get_template_file "config/compass.rb"
-# Setup default sass files.
-get_template_file "app/stylesheets/ie.scss"
-get_template_file "app/stylesheets/print.scss"
-get_template_file "app/stylesheets/application.scss"
-get_template_file "app/stylesheets/partials/_base.scss"
-# Include a styleguide accessible at /styleguide.html
-get_template_file "public/styleguide.html"
-
-# CREATE GUARDFILE
-get_template_file "Guardfile"
-
-get_template_file ".rspec"
-get_template_file "spec/spec_helper.rb"
-get_template_file "features/support/env.rb"
-get_template_file "config/cucumber.yml"
+directory('template')
 
 # CREATE GEMSET FOR APP
 run "rvm --create #{RUBY_GEMSET_NAME}"
@@ -106,7 +108,7 @@ remove_file 'public/images/rails.png'
 # run_in_gemset "bundle install --binstubs"
 
 # SETUP RSPEC AND CUCUMBER TO WORK WITH SPORK
-run_in_gemset 'rails g cucumber:install'
+# run_in_gemset 'rails g cucumber:install'
 
 # CREATE DATABASES
 # if create_databases
