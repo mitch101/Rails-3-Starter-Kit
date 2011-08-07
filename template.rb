@@ -11,12 +11,6 @@ def get_template_file(template_file, destination = template_file)
   get TEMPLATE_PATH + template_file, destination
 end
 
-# CREATE AND USE A PROJECT SPECIFIC GEMSET
-run("rvm --create #{RUBY_GEMSET_NAME}")
-
-# INSTALL BUNDLER
-run("gem install bundler")
-
 # SETUP RVM TO USE/CREATE PROJECT SPECIFIC GEMSET WHEN CD INTO PROJECT
 get_template_file "dot_rvmrc", ".rvmrc"
 gsub_file '.rvmrc', '[ruby_name]', "#{RUBY_NAME}"
@@ -53,38 +47,21 @@ application generators
 #   Include compass generated css.
 get_template_file "app/views/layouts/application.html.haml"
 
-# INSTALL GEMS
-#   Note: We generate bin stubs so that we don't need to use
-#   'bundle exec' before gem executables. You should add
-#   './bin' to your path so that you can run 'rake', 'cucumber'
-#   etc from the Gemfile with ease.
-#   See http://yehudakatz.com/2011/05/30/gem-versioning-and-bundler-doing-it-right/
-run 'bundle install --binstubs'
-
 # SETUP RSPEC AND CUCUMBER
 generate 'rspec:install'
 generate 'cucumber:install'
 
 if yes?("\r\nInstall with postgres?")
   # INSTALL POSTGRES
-  #   Note: pg gem causes trouble with rspec install so it 
-  #   has to be loaded after.
-  
   # Create a database.yml for postgres
   postgres_pass = ask("\r\nEnter your postgres password:")
   remove_file "config/database.yml"
   get_template "config/database.yml"
   gsub_file 'config/database.yml', '[app_name]',"#{APP_NAME}"
   gsub_file 'config/database.yml', '[postgres_pass]',"#{postgres_pass}" 
-  # Install pg gem.
+  # Add pg gem.
   gem 'pg'
-  run 'bundle install'
-  # Create databases
-  rake "db:create:all"
 end
-
-# MIGRATE THE DATABASE (do I have to do this?)  
-rake "db:migrate"
 
 # INSTALL COMPASS
 # Create compass config file.
@@ -112,3 +89,14 @@ git :init
 git :submodule => "init"
 git :add => '.'
 git :commit => "-a -m 'Initial commit'"
+
+# INSTALL GEMS
+#   Note: We generate bin stubs so that we don't need to use
+#   'bundle exec' before gem executables. You should add
+#   './bin' to your path so that you can run 'rake', 'cucumber'
+#   etc from the Gemfile with ease.
+#   See http://yehudakatz.com/2011/05/30/gem-versioning-and-bundler-doing-it-right/
+# run 'bundle install --binstubs'
+# run 'bundle install'
+# # Create databases
+# rake "db:create:all"
