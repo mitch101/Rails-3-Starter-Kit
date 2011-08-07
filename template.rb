@@ -7,14 +7,14 @@
 RUBY_VERSION = "ruby-1.9.2-p290"
 TEMPLATE_PATH = "https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/"
 
-def get_template(template_file, destination)
+def get_template(template_file, *destination)
   get TEMPLATE_PATH + template_file, destination
 end
 
 # SETUP RVM TO CREATE PROJECT SPECIFIC GEMSET
-get_template "rvmrc", ".rvmrc"
-gsub_file '.rvmrc', '[app_name]',"#{app_name}"
-gsub_file '.rvmrc', '[ruby_version]',"#{RUBY_VERSION}"
+get_template "dot_rvmrc", ".rvmrc"
+gsub_file '.rvmrc', '[app_name]', "#{app_name}"
+gsub_file '.rvmrc', '[ruby_version]', "#{RUBY_VERSION}"
 
 # REPLACE THE DEFAULT GEMFILE
 remove_file "Gemfile"
@@ -94,7 +94,7 @@ rake "db:migrate"
 
 # INSTALL COMPASS
 # Create compass config file.
-get_template "config_compass.rb", "config/compass.rb". "config/initializers/compass.rb"
+get_template "compass.rb", "config/compass.rb"
 # Setup default sass files.
 empty_directory "app/stylesheets"
 empty_directory "app/stylesheets/partials"
@@ -105,6 +105,9 @@ get_template "_base.scss", "app/stylesheets/partials/_base.scss"
 # Include a styleguide accessible at /styleguide.html
 get_template "styleguide.html", "public/styleguide.html"
 
+# CREATE GUARDFILE
+get_template "Guardfile", "Guardfile"
+
 # CLEANUP SOME SILLY DEFAULT RAILS FILES
 remove_file 'public/index.html'
 remove_file 'public/images/rails.png'
@@ -112,7 +115,7 @@ remove_file 'public/images/rails.png'
 # CONFIGURE GIT AND INITIALIZE A REPOSITORY
 # Create a standard .gitignore file.
 remove_file ".gitignore"
-get_template "app_gitignore", ".gitignore"
+get_template "dot_gitignore", ".gitignore"
 # Initialize a git repository.
 git :init
 git :submodule => "init"
