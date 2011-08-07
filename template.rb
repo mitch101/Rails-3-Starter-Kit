@@ -9,26 +9,35 @@
 #--------------------------
 # BASIC GEMS
 #--------------------------
-gem "ruby-debug", :group => [:development, :test]
-#gem "awesome_print", :group => [:development, :test]
-gem "rspec-rails", "2.5.0", :group => [:development, :test]
-gem 'cucumber-rails', "0.4.0", :group => :test
-gem 'database_cleaner', :group => :test
-gem 'capybara', "0.4.1.2", :group => :test
-#gem "annotate-models", :group => :development
-#gem 'metrical', :group => :development
-#gem 'rake', "0.8.7" # There was a bug in 1.9 rake with rails, however forcing version here makes you use bundle exec rake, which isn't nice.
-gem "rails3-generators", :group => [:development, :test]
-gem "factory_girl_rails", "1.0.1", :group => [:development, :test]
-gem "haml-rails", ">= 0.3.4"
-gem "compass", ">= 0.11.3"
+
+gem 'rails', '3.0.9'
+gem 'sqlite3'
+gem "haml-rails"
+gem "compass"
+
+group :development, :test do
+  gem "factory_girl_rails"
+  gem "rails3-generators"
+  gem "ruby-debug19"
+  gem 'spork', '>=0.9.0.rc7'
+  gem 'guard'
+  gem 'guard-spork'
+  gem 'growl'
+  gem 'guard-rspec'
+  gem 'guard-cucumber'
+end
+
+group :test do
+  gem "rspec-rails"
+  gem "cucumber-rails"
+  gem "database_cleaner"
+  gem "capybara"
+end
 
 #--------------------------
 # Remove prototype
 #--------------------------
-# remove the Prototype adapter file
 remove_file 'public/javascripts/rails.js'
-# remove the Prototype files (if they exist)
 remove_file 'public/javascripts/controls.js'
 remove_file 'public/javascripts/dragdrop.js'
 remove_file 'public/javascripts/effects.js'
@@ -56,7 +65,7 @@ generators = <<-GENERATORS
       g.controller_specs false
       g.helper_specs false
       g.routing_specs false
-      g.request_specs false
+      g.request_specs true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
 GENERATORS
