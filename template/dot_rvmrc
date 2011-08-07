@@ -7,6 +7,7 @@
 ruby_gemset_name="[ruby_gemset_name]"
 ruby_name="[ruby_name]"
 
+echo "RVM: Using ${ruby_gemset_name} for this project."
 # Ensure we have the right ruby installed to use this project.
 if rvm list strings | grep -q "${ruby_name}" ; then
 
@@ -22,7 +23,7 @@ if rvm list strings | grep -q "${ruby_name}" ; then
     # If the environment file has not yet been created, use the RVM CLI to select.
     if ! rvm --create  "${ruby_gemset_name}"
     then
-      echo "Failed to create RVM environment '$environment_id'."
+      echo "RVM: Failed to create environment '$environment_id'."
     fi
     
   fi
@@ -39,12 +40,12 @@ if rvm list strings | grep -q "${ruby_name}" ; then
   #   './bin' to your path so that you can run 'rake', 'cucumber'
   #   etc from the Gemfile with ease.
   #   See http://yehudakatz.com/2011/05/30/gem-versioning-and-bundler-doing-it-right/
-  echo "Ensuring your bundle is up to date."
-  bundle install --binstubs | grep -v 'Using' | grep -v 'complete' | sed '/^$/d'
+  echo "RVM: Ensuring your bundle is up to date."
+  bundle install | grep -v 'Using' | grep -v 'complete' | sed '/^$/d'
 
 else
 
   # Notify the user to install the desired interpreter before proceeding.
-  echo "${ruby_name} was not found, please run 'rvm install ${ruby_name}' and then cd back into the project directory."
+  echo "RVM: ${ruby_name} was not found, please run 'rvm install ${ruby_name}' and then cd back into the project directory."
 
 fi
