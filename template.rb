@@ -16,6 +16,9 @@ get_template_file "dot_rvmrc", ".rvmrc"
 gsub_file '.rvmrc', '[ruby_name]', "#{RUBY_NAME}"
 gsub_file '.rvmrc', '[ruby_gemset_name]', "#{RUBY_GEMSET_NAME}"
 
+# CREATE GEMSET FOR APP
+run "rvm --create #{RUBY_GEMSET_NAME}"
+
 # REPLACE THE DEFAULT GEMFILE
 get_template_file "Gemfile"
 
@@ -47,10 +50,6 @@ application generators
 #   Include compass generated css.
 get_template_file "app/views/layouts/application.html.haml"
 
-# SETUP RSPEC AND CUCUMBER
-generate 'rspec:install'
-generate 'cucumber:install'
-
 if yes?("\r\nInstall with postgres?")
   # INSTALL POSTGRES
   # Create a database.yml for postgres
@@ -80,13 +79,16 @@ get_template_file "Guardfile"
 # CLEANUP SOME SILLY DEFAULT RAILS FILES
 remove_file 'public/index.html'
 remove_file 'public/images/rails.png'
+remove_file 'README'
+create_file 'README'
+create_file 'log/.gitkeep'
+create_file 'tmp/.gitkeep'
 
 # CONFIGURE GIT AND INITIALIZE A REPOSITORY
 # Create a standard .gitignore file.
 get_template_file "dot_gitignore", ".gitignore"
 # Initialize a git repository.
 git :init
-git :submodule => "init"
 git :add => '.'
 git :commit => "-a -m 'Initial commit'"
 
@@ -96,7 +98,19 @@ git :commit => "-a -m 'Initial commit'"
 #   './bin' to your path so that you can run 'rake', 'cucumber'
 #   etc from the Gemfile with ease.
 #   See http://yehudakatz.com/2011/05/30/gem-versioning-and-bundler-doing-it-right/
+#   Also Note: We must specify the gem set here, since we can't change the
+#   current gemset in the template. It will be chosen when we navigate to
+#   the project.
+run "rvm #{RUBY_GEMSET_NAME} gem install bundler"
+run "rvm #{RUBY_GEMSET_NAME} -S bundle install --binstubs"
+
 # run 'bundle install --binstubs'
 # run 'bundle install'
 # # Create databases
-# rake "db:create:all"
+
+# SETUP RSPEC AND CUCUMBER
+generate 'rspec:install'
+generate 'cucumber:install'
+
+# CREATE DATABASES
+rake 'db:create:all'

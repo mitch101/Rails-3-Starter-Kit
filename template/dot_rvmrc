@@ -7,9 +7,6 @@
 ruby_gemset_name="[ruby_gemset_name]"
 ruby_name="[ruby_name]"
 
-echo `pwd`
-echo "HELLOWORLD!"
-
 # Ensure we have the right ruby installed to use this project.
 if rvm list strings | grep -q "${ruby_name}" ; then
 
@@ -36,9 +33,14 @@ if rvm list strings | grep -q "${ruby_name}" ; then
     gem install bundler
   fi
 
-  # Bundle while redcing excess noise.
+  # Bundle while reducing excess noise.
+  #   We generate bin stubs so that we don't need to use
+  #   'bundle exec' before gem executables. You should add
+  #   './bin' to your path so that you can run 'rake', 'cucumber'
+  #   etc from the Gemfile with ease.
+  #   See http://yehudakatz.com/2011/05/30/gem-versioning-and-bundler-doing-it-right/
   echo "Ensuring your bundle is up to date."
-  bundle | grep -v 'Using' | grep -v 'complete' | sed '/^$/d'
+  bundle install --binstubs | grep -v 'Using' | grep -v 'complete' | sed '/^$/d'
 
 else
 
