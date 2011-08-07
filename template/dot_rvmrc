@@ -7,6 +7,9 @@
 ruby_string="[ruby_version]"
 gemset_name="[app_name]"
 
+echo `pwd`
+echo "HELLOWORLD!"
+
 # Ensure we have the right ruby installed to use this project.
 if rvm list strings | grep -q "${ruby_string}" ; then
 
