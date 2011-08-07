@@ -18,7 +18,7 @@ def run_in_gemset(command)
 end
 
 # SETUP RVM TO USE/CREATE PROJECT SPECIFIC GEMSET WHEN CD INTO PROJECT
-get_template_file "dot_rvmrc", ".rvmrc"
+get_template_file ".rvmrc"
 gsub_file '.rvmrc', '[ruby_name]', "#{RUBY_NAME}"
 gsub_file '.rvmrc', '[ruby_gemset_name]', "#{RUBY_GEMSET_NAME}"
 
@@ -99,16 +99,19 @@ create_file 'tmp/.gitkeep'
 run_in_gemset "gem install bundler"
 run_in_gemset "bundle install --binstubs"
 
-# SETUP RSPEC AND CUCUMBER
-run_in_gemset 'rails g rspec:install'
+# SETUP RSPEC AND CUCUMBER TO WORK WITH SPORK
 run_in_gemset 'rails g cucumber:install'
+get_template_file ".rspec"
+get_template_file "spec/spec_helper.rb"
+get_template_file "features/support/env.rb"
+get_template_file "config/cucumber.yml"
 
 # CREATE DATABASES
 run_in_gemset "rake db:create:all"
 
 # CONFIGURE GIT AND INITIALIZE A REPOSITORY
 # Create a standard .gitignore file.
-get_template_file "dot_gitignore", ".gitignore"
+get_template_file ".gitignore"
 # Initialize a git repository.
 git :init
 git :add => '.'
