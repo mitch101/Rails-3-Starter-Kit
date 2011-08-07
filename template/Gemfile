@@ -1,7 +1,11 @@
+source 'http://rubygems.org'
+
+# All environments.
 gem 'rails', '3.0.9'
 gem 'sqlite3'
 gem "haml-rails"
 gem "compass"
+
 group :development, :test do
   gem "factory_girl_rails"
   gem "rails3-generators"
@@ -14,6 +18,7 @@ group :development, :test do
   gem 'guard-cucumber'
   gem 'rb-fsevent'
 end                   
+
 group :test do
   gem "rspec-rails"
   gem "cucumber-rails"

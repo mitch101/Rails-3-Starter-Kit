@@ -80,17 +80,17 @@ rake "db:migrate"
 
 # INSTALL COMPASS
 # Create compass config file.
-get_template "config/compass.rb"
+get_template_file "config/compass.rb"
 # Setup default sass files.
-get_template "app/stylesheets/ie.scss"
-get_template "app/stylesheets/print.scss"
-get_template "app/stylesheets/application.scss"
-get_template "app/stylesheets/partials/_base.scss"
+get_template_file "app/stylesheets/ie.scss"
+get_template_file "app/stylesheets/print.scss"
+get_template_file "app/stylesheets/application.scss"
+get_template_file "app/stylesheets/partials/_base.scss"
 # Include a styleguide accessible at /styleguide.html
-get_template "public/styleguide.html"
+get_template_file "public/styleguide.html"
 
 # CREATE GUARDFILE
-get_template "Guardfile"
+get_template_file "Guardfile"
 
 # CLEANUP SOME SILLY DEFAULT RAILS FILES
 remove_file 'public/index.html'
@@ -98,7 +98,7 @@ remove_file 'public/images/rails.png'
 
 # CONFIGURE GIT AND INITIALIZE A REPOSITORY
 # Create a standard .gitignore file.
-get_template "dot_gitignore", ".gitignore"
+get_template_file "dot_gitignore", ".gitignore"
 # Initialize a git repository.
 git :init
 git :submodule => "init"
