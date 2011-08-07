@@ -12,6 +12,7 @@ group :development, :test do
   gem 'growl'
   gem 'guard-rspec'
   gem 'guard-cucumber'
+  gem 'rb-fsevent'
 end                   
 group :test do
   gem "rspec-rails"

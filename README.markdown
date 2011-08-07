@@ -2,7 +2,7 @@
 
 ## Assumptions
 
-I will assume you currently have Mac OSX 10.6, XCode / Developer Kit, Git, Growl, Textmate.
+I will assume you currently have Mac OSX 10.6, XCode / Developer Kit, Git
 
 ## Basic Install
 
@@ -10,26 +10,21 @@ I will assume you currently have Mac OSX 10.6, XCode / Developer Kit, Git, Growl
 
     $ mkdir -p ~/.rvm/src/ && cd ~/.rvm/src && rm -rf ./rvm/ && git clone git://github.com/wayneeseguin/rvm.git && cd rvm && ./install
 
-Add the following to your ~/.profile:
+Add the following to your ~/.bashrc:
 
     # Load RVM
     [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
-Load your .profile:
+Load your .bashrc:
 
-    $ source ~/.profile
+    $ source ~/.bashrc
     $ rvm -v
-    $ rvm list
 
-### Install ruby 1.8.7:
+### Install ruby 1.9.2:
 
-    $ rvm install 1.8.7
-    $ rvm 1.8.7 --default
-    $ ruby -v
-    $ rvm list
-    $ rvm gemdir
-    $ gem -v
-    $ gem list
+    $ rvm install 1.9.2
+    $ rvm 1.9.2 --default
+    $ ruby -v && rvm list && rvm gemdir && gem -v && gem list
 
 Make gem install not compile rdoc or ri, add the following to ~/.gemrc:
   
@@ -48,7 +43,6 @@ Install with homebrew:
     brew install postgres
 
     initdb /usr/local/var/postgres
-    
 
 For more detailed instructions on this setup, see: https://willj.net/2011/05/31/setting-up-postgresql-for-ruby-on-rails-development-on-os-x/
 http://russbrooks.com/2010/11/25/install-postgresql-9-on-os-x
@@ -77,99 +71,3 @@ Bundles > Bundle Editor > Reload Bundles, in TextMate.
 Create a new app by cloning this repository, and running:
 
     $ rails new [app] -m https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template.rb
-    
-Your new app has the following features.
-
-* **RSpec:** generators working
-* **factory_girl:** generators working, loaded in rspec
-* **jQuery:** replacing prototype, included in the default layout, loaded from google
-* **Haml:** generators working, replacing default layout with a haml layout.
-* **Compass:** look at styleguides.html and application.html.haml to see how to use it.
-* **postgres:** (optional) configured with provided password
-* **cucumber and capybara:** for integration testing
-* **ruby debug**
-
-The template also generates a good .gitignore file, initializes an empty git repository, and cleans up some unnecessary rails files.
-
-No additional setup tasks required.
-
-## Tips for using your new rails application
-    
-* Debug your app by adding *debugger* in your code. Use *rails s --debug* to debug in server. Type *help* in debugger to learn commands.
-* Run individual specs or feature files in textmate by typing: *cmd-r*.
-    
-## Bonus Setup
-
-### Pimp Your Console
-
-For a nice console prompt, logging to console, console indenting, setup your ~.irbrc to look like:
-
-    %w{rubygems}.each do |lib| 
-      begin 
-        require lib 
-      rescue LoadError => err
-        $stderr.puts "Couldn't load #{lib}: #{err}"
-      end
-    end
-
-    # Prompt behavior
-    IRB.conf[:AUTO_INDENT] = true
-
-    # Loaded when we fire up the Rails console
-    # => Set a special rails prompt.
-    # => Redirect logging to STDOUT.   
-    if defined?(Rails.env)
-      rails_env = Rails.env
-      rails_root = File.basename(Dir.pwd)
-      prompt = "#{rails_root}[#{rails_env.sub('production', 'prod').sub('development', 'dev')}]"
-      IRB.conf[:PROMPT] ||= {}
-      IRB.conf[:PROMPT][:RAILS] = {
-        :PROMPT_I => "#{prompt}>> ",
-        :PROMPT_S => "#{prompt}* ",
-        :PROMPT_C => "#{prompt}? ",
-        :RETURN   => "=> %s\n" 
-      }
-      IRB.conf[:PROMPT_MODE] = :RAILS
-      # Redirect log to STDOUT, which means the console itself
-      IRB.conf[:IRB_RC] = Proc.new do
-        logger = Logger.new(STDOUT)
-        ActiveRecord::Base.logger = logger
-        ActiveResource::Base.logger = logger
-        ActiveRecord::Base.instance_eval { alias :[] :find }
-      end
-    end
-    
-### Install Autotest and Spork for fast, continuous testing
-
-Install growl from http://growl.info/ and set it to start at login.
-
-Install autotest gems.
-
-    gem install autotest-standalone
-    gem install autotest-fsevent
-    gem install autotest-growl
-
-Setup autotest to use fsevent and growl---create ~/.autotest with:
-  	
-  	require 'autotest/fsevent'
-  	require 'autotest/growl'
-
-Setup autotest to run cucumber---add the following to your ~/.profile:
-    
-    export AUTOFEATURE=true
-
-Run autotest in your root project directory:
-    
-    autotest
-
-Install spork to increase your test speed. Follow the instructions [here](
-http://www.rubyinside.com/how-to-rails-3-and-rspec-2-4336.html).
-
-## TODOs
-
-* Document spork install
-* Add fiveruns dev toolbar
-* Add rails optimization gem from rails lab vids
-* Fix rake versioning nightmare. Gives warnings and conflict.
-* Update rails and ruby versions
-
