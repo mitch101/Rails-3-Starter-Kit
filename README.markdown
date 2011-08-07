@@ -35,6 +35,10 @@ Make gem install not compile rdoc or ri, add the following to ~/.gemrc:
     gem install rails
     rails -v
 
+### Install Growl and growlnotify
+
+Go to the [growl homepage](http://growl.info/) and download the dmg. Install both growl, and growlnotify (in the extras directory).
+
 ### Install Postgres  
 
 Install with homebrew:
@@ -61,6 +65,6 @@ Now you can create a new app using:
 
     rails_template [app_name]
 
-## Other setup
+## What next?
 
-That's all you need. But you should take a look at my shared [tm_bundles](https://github.com/mitch101/tm_bundles) and [dotfiles](https://github.com/mitch101/tm_bundles) for some tips on how you can pimp your rails experience.
+That's all you need. Go make an awesome rails app! But, you should take a look at my shared [tm_bundles](https://github.com/mitch101/tm_bundles) and [dotfiles](https://github.com/mitch101/tm_bundles) for some tips on how you can pimp your rails experience.
