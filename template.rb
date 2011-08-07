@@ -2,7 +2,7 @@
 # See the README for more info.
 
 RUBY_VERSION = "ruby-1.9.2-p290"
-TEMPLATE_PATH = "https://github.com/mitch101/Rails-3-Starter-Kit/tree/master/template/"
+TEMPLATE_PATH = "https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template/"
 
 def get_template_file(template_file, destination = template_file)
   remove_file destination
