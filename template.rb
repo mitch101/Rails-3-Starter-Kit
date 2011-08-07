@@ -17,17 +17,6 @@ def run_in_gemset(command)
   run "rvm #{RUBY_GEMSET_NAME} -S #{command}"
 end
 
-# SETUP RVM TO USE/CREATE PROJECT SPECIFIC GEMSET WHEN CD INTO PROJECT
-get_template_file ".rvmrc"
-gsub_file '.rvmrc', '[ruby_name]', "#{RUBY_NAME}"
-gsub_file '.rvmrc', '[ruby_gemset_name]', "#{RUBY_GEMSET_NAME}"
-
-# CREATE GEMSET FOR APP
-run "rvm --create #{RUBY_GEMSET_NAME}"
-
-# REPLACE THE DEFAULT GEMFILE
-get_template_file "Gemfile"
-
 # CONFIGURE GENERATORS
 #   Don't generate stylesheets when scaffolding.
 #   Generate factories using the rails3-generator for factory-girl.
@@ -49,6 +38,14 @@ generators = <<-GENERATORS
 GENERATORS
 application generators
 
+# SETUP RVM TO USE/CREATE PROJECT SPECIFIC GEMSET WHEN CD INTO PROJECT
+# get_template_file ".rvmrc"
+# gsub_file '.rvmrc', '[ruby_name]', "#{RUBY_NAME}"
+# gsub_file '.rvmrc', '[ruby_gemset_name]', "#{RUBY_GEMSET_NAME}"
+
+# REPLACE THE DEFAULT GEMFILE
+get_template_file "Gemfile"
+
 # CREATE HAML APPLICATION LAYOUT
 #   Replace the erb application layout with haml one.
 #   Include jquery hosted by google.
@@ -56,17 +53,7 @@ application generators
 #   Include compass generated css.
 get_template_file "app/views/layouts/application.html.haml"
 
-if yes?("\r\nInstall with postgres?")
-  # INSTALL POSTGRES
-  # Create a database.yml for postgres
-  postgres_pass = ask("\r\nEnter your postgres password:")
-  remove_file "config/database.yml"
-  get_template "config/database.yml"
-  gsub_file 'config/database.yml', '[app_name]',"#{APP_NAME}"
-  gsub_file 'config/database.yml', '[postgres_pass]',"#{postgres_pass}" 
-  # Add pg gem.
-  gem 'pg'
-end
+get_template_file ".gitignore"
 
 # INSTALL COMPASS
 # Create compass config file.
@@ -82,13 +69,32 @@ get_template_file "public/styleguide.html"
 # CREATE GUARDFILE
 get_template_file "Guardfile"
 
+get_template_file ".rspec"
+get_template_file "spec/spec_helper.rb"
+get_template_file "features/support/env.rb"
+get_template_file "config/cucumber.yml"
+
+# CREATE GEMSET FOR APP
+run "rvm --create #{RUBY_GEMSET_NAME}"
+
+# if yes?("\r\nInstall with postgres?")
+#   # INSTALL POSTGRES
+#   # Create a database.yml for postgres
+#   postgres_pass = ask("\r\nEnter your postgres password:")
+#   remove_file "config/database.yml"
+#   get_template "config/database.yml"
+#   gsub_file 'config/database.yml', '[app_name]',"#{APP_NAME}"
+#   gsub_file 'config/database.yml', '[postgres_pass]',"#{postgres_pass}" 
+#   # Add pg gem.
+#   gem 'pg'
+#   create_databases = true
+# else
+#   create_databases = false
+# end
+
 # CLEANUP SOME SILLY DEFAULT RAILS FILES
 remove_file 'public/index.html'
 remove_file 'public/images/rails.png'
-remove_file 'README'
-create_file 'README'
-create_file 'log/.gitkeep'
-create_file 'tmp/.gitkeep'
 
 # INSTALL GEMS
 #   Note: We generate bin stubs so that we don't need to use
@@ -96,22 +102,21 @@ create_file 'tmp/.gitkeep'
 #   './bin' to your path so that you can run 'rake', 'cucumber'
 #   etc from the Gemfile with ease.
 #   See http://yehudakatz.com/2011/05/30/gem-versioning-and-bundler-doing-it-right/
-run_in_gemset "gem install bundler"
-run_in_gemset "bundle install --binstubs"
+# run_in_gemset "gem install bundler"
+# run_in_gemset "bundle install --binstubs"
 
 # SETUP RSPEC AND CUCUMBER TO WORK WITH SPORK
 run_in_gemset 'rails g cucumber:install'
-get_template_file ".rspec"
-get_template_file "spec/spec_helper.rb"
-get_template_file "features/support/env.rb"
-get_template_file "config/cucumber.yml"
 
 # CREATE DATABASES
-run_in_gemset "rake db:create:all"
+# if create_databases
+#   run_in_gemset "rake db:create:all"
+# end
 
 # CONFIGURE GIT AND INITIALIZE A REPOSITORY
 # Create a standard .gitignore file.
-get_template_file ".gitignore"
+create_file 'log/.gitkeep'
+create_file 'tmp/.gitkeep'
 # Initialize a git repository.
 git :init
 git :add => '.'
