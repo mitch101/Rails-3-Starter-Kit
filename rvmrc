@@ -33,6 +33,7 @@ if rvm list strings | grep -q "${ruby_string}" ; then
   fi
 
   # Bundle while redcing excess noise.
+  echo "Ensuring your bundle is up to date."
   bundle | grep -v 'Using' | grep -v 'complete' | sed '/^$/d'
 
 else

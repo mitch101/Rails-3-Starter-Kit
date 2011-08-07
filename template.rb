@@ -104,9 +104,8 @@ end
 rake "db:migrate"
 
 # INSTALL COMPASS
-# Install config files that 'compass init rails .' would generate.
-get "#{@template_path}/config_compass.rb", "config/compass.rb"
-get "#{@template_path}/initializers_compass.rb", "config/initializers/compass.rb"
+# Create compass config file.
+get "#{@template_path}/config_compass.rb", "config/compass.rb". "config/initializers/compass.rb"
 # Setup default sass files.
 empty_directory "app/stylesheets"
 empty_directory "app/stylesheets/partials"
