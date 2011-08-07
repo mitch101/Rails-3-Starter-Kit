@@ -11,6 +11,13 @@ def get_template_file(template_file, destination = template_file)
   get TEMPLATE_PATH + template_file, destination
 end
 
+#   For We must specify the gem set here, since we can't change the
+#   current gemset in the template. It will be chosen when we navigate to
+#   the project.
+def run_in_gemset(command)
+  run "rvm #{RUBY_GEMSET_NAME} #{command}"
+end
+
 # SETUP RVM TO USE/CREATE PROJECT SPECIFIC GEMSET WHEN CD INTO PROJECT
 get_template_file "dot_rvmrc", ".rvmrc"
 gsub_file '.rvmrc', '[ruby_name]', "#{RUBY_NAME}"
@@ -90,7 +97,7 @@ get_template_file "dot_gitignore", ".gitignore"
 # Initialize a git repository.
 git :init
 git :add => '.'
-git :commit => "-a -m 'Initial commit'"
+git :commit => "-a -q -m 'Initial commit'"
 
 # INSTALL GEMS
 #   Note: We generate bin stubs so that we don't need to use
@@ -98,19 +105,17 @@ git :commit => "-a -m 'Initial commit'"
 #   './bin' to your path so that you can run 'rake', 'cucumber'
 #   etc from the Gemfile with ease.
 #   See http://yehudakatz.com/2011/05/30/gem-versioning-and-bundler-doing-it-right/
-#   Also Note: We must specify the gem set here, since we can't change the
-#   current gemset in the template. It will be chosen when we navigate to
-#   the project.
 run "rvm #{RUBY_GEMSET_NAME} gem install bundler"
-run "rvm #{RUBY_GEMSET_NAME} -S bundle install --binstubs"
+#run "rvm #{RUBY_GEMSET_NAME} -S bundle install --binstubs"
 
 # run 'bundle install --binstubs'
 # run 'bundle install'
 # # Create databases
 
 # SETUP RSPEC AND CUCUMBER
-generate 'rspec:install'
-generate 'cucumber:install'
+run_in_gemset('rails g rspec:install')
+#generate 'rspec:install'
+#generate 'cucumber:install'
 
 # CREATE DATABASES
-rake 'db:create:all'
+#rake 'db:create:all'
