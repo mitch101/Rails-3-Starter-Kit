@@ -15,7 +15,7 @@ end
 #   current gemset in the template. It will be chosen when we navigate to
 #   the project.
 def run_in_gemset(command)
-  run "rvm #{RUBY_GEMSET_NAME} #{command}"
+  run "rvm #{RUBY_GEMSET_NAME} -S #{command}"
 end
 
 # SETUP RVM TO USE/CREATE PROJECT SPECIFIC GEMSET WHEN CD INTO PROJECT
