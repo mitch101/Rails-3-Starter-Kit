@@ -3,7 +3,7 @@
 
 APP_NAME = app_name
 RUBY_NAME = "ruby-1.9.2-p290"
-RUBY_GEMSET_NAME = "#{RUBY_VERSION}@#{APP_NAME}"
+RUBY_GEMSET_NAME = "#{RUBY_NAME}@#{APP_NAME}"
 TEMPLATE_PATH = "https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template/"
 
 def get_template_file(template_file, destination = template_file)
