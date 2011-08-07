@@ -4,32 +4,21 @@
 # For templating commands, see thor docs: http://rdoc.info/github/wycats/thor/master/Thor/Actions#copy_file-instance_method
 # and rails specific templating commands at: http://edgeguides.rubyonrails.org/generators.html#generator-methods
 
-@template_path = "https://raw.github.com/mitch101/Rails-3-Starter-Kit/master"
-@ruby_version = "ruby-1.9.2-p290"
+RUBY_VERSION = "ruby-1.9.2-p290"
+TEMPLATE_PATH = "https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/"
+
+def get_template(template_file, destination)
+  get TEMPLATE_PATH + template_file, destination
+end
 
 # SETUP RVM TO CREATE PROJECT SPECIFIC GEMSET
-get "#{@template_path}/rvmrc", ".rvmrc"
+get_template "rvmrc", ".rvmrc"
 gsub_file '.rvmrc', '[app_name]',"#{app_name}"
-gsub_file '.rvmrc', '[ruby_version]',"#{@ruby_version}"
+gsub_file '.rvmrc', '[ruby_version]',"#{RUBY_VERSION}"
 
-# DEFINE DEFAULT GEMS TO INCLUDE
-gem 'rails', '3.0.9'
-gem 'sqlite3'
-gem "haml-rails"
-gem "compass"
-gem "factory_girl_rails", :group => [:development, :test]
-gem "rails3-generators", :group => [:development, :test]
-gem "ruby-debug19", :group => [:development, :test]
-gem 'spork', '>=0.9.0.rc7', :group => [:development, :test]
-gem 'guard', :group => [:development, :test]
-gem 'guard-spork', :group => [:development, :test]
-gem 'growl', :group => [:development, :test]
-gem 'guard-rspec', :group => [:development, :test]
-gem 'guard-cucumber', :group => [:development, :test]
-gem "rspec-rails", :group => [:test]
-gem "cucumber-rails", :group => [:test]
-gem "database_cleaner", :group => [:test]
-gem "capybara", :group => [:test]
+# REPLACE THE DEFAULT GEMFILE
+remove_file "Gemfile"
+get_template "Gemfile", "Gemfile"
 
 # REMOVE PROTOTYPE
 remove_file 'public/javascripts/rails.js'
@@ -68,7 +57,7 @@ application generators
 #   Include underscore.js hosted by cdnjs
 #   Include compass generated css.
 remove_file "app/views/layouts/application.html.erb"
-get "#{@template_path}/application.html.haml", "app/views/layouts/application.html.haml"
+get_template "application.html.haml", "app/views/layouts/application.html.haml"
 
 # INSTALL GEMS
 #   Note: We generate bin stubs so that we don't need to use
@@ -90,7 +79,7 @@ if yes?("\r\nInstall with postgres?")
   # Create a database.yml for postgres
   postgres_pass = ask("\r\nEnter your postgres password:")
   remove_file "config/database.yml"
-  get "#{@template_path}/database.yml", "config/database.yml"
+  get_template "database.yml", "config/database.yml"
   gsub_file 'config/database.yml', '[app_name]',"#{app_name}"
   gsub_file 'config/database.yml', '[postgres_pass]',"#{postgres_pass}" 
   # Install pg gem.
@@ -105,16 +94,16 @@ rake "db:migrate"
 
 # INSTALL COMPASS
 # Create compass config file.
-get "#{@template_path}/config_compass.rb", "config/compass.rb". "config/initializers/compass.rb"
+get_template "config_compass.rb", "config/compass.rb". "config/initializers/compass.rb"
 # Setup default sass files.
 empty_directory "app/stylesheets"
 empty_directory "app/stylesheets/partials"
-get "#{@template_path}/ie.scss", "app/stylesheets/ie.scss"
-get "#{@template_path}/print.scss", "app/stylesheets/print.scss"
-get "#{@template_path}/application.scss", "app/stylesheets/application.scss"
-get "#{@template_path}/_base.scss", "app/stylesheets/partials/_base.scss"
+get_template "ie.scss", "app/stylesheets/ie.scss"
+get_template "print.scss", "app/stylesheets/print.scss"
+get_template "application.scss", "app/stylesheets/application.scss"
+get_template "_base.scss", "app/stylesheets/partials/_base.scss"
 # Include a styleguide accessible at /styleguide.html
-get "#{@template_path}/styleguide.html", "public/styleguide.html"
+get_template "styleguide.html", "public/styleguide.html"
 
 # CLEANUP SOME SILLY DEFAULT RAILS FILES
 remove_file 'public/index.html'
@@ -123,7 +112,7 @@ remove_file 'public/images/rails.png'
 # CONFIGURE GIT AND INITIALIZE A REPOSITORY
 # Create a standard .gitignore file.
 remove_file ".gitignore"
-get "#{@template_path}/app_gitignore", ".gitignore"
+get_template "app_gitignore", ".gitignore"
 # Initialize a git repository.
 git :init
 git :submodule => "init"
