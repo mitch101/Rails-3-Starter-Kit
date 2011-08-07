@@ -5,6 +5,12 @@
 # and rails specific templating commands at: http://edgeguides.rubyonrails.org/generators.html#generator-methods
 
 @template_path = "https://raw.github.com/mitch101/Rails-3-Starter-Kit/master"
+@ruby_version = "ruby-1.9.2-p290"
+
+# SETUP RVM TO CREATE PROJECT SPECIFIC GEMSET
+get "#{@template_path}/rvmrc", ".rvmrc"
+gsub_file '.rvmrc', '[app_name]',"#{app_name}"
+gsub_file '.rvmrc', '[ruby_version]',"#{@ruby_version}"
 
 # DEFINE DEFAULT GEMS TO INCLUDE
 gem 'rails', '3.0.9'
