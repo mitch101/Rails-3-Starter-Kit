@@ -11,9 +11,8 @@ def get_template_file(template_file, destination = template_file)
   get TEMPLATE_PATH + template_file, destination
 end
 
-#   For We must specify the gem set here, since we can't change the
-#   current gemset in the template. It will be chosen when we navigate to
-#   the project.
+# Run a command in the scope of the new gemset for this project.
+# (Otherwise it will use the wrong rubies.)
 def run_in_gemset(command)
   run "rvm #{RUBY_GEMSET_NAME} -S #{command}"
 end
@@ -91,6 +90,22 @@ create_file 'README'
 create_file 'log/.gitkeep'
 create_file 'tmp/.gitkeep'
 
+# INSTALL GEMS
+#   Note: We generate bin stubs so that we don't need to use
+#   'bundle exec' before gem executables. You should add
+#   './bin' to your path so that you can run 'rake', 'cucumber'
+#   etc from the Gemfile with ease.
+#   See http://yehudakatz.com/2011/05/30/gem-versioning-and-bundler-doing-it-right/
+run_in_gemset "gem install bundler"
+run_in_gemset "bundle install --binstubs"
+
+# SETUP RSPEC AND CUCUMBER
+run_in_gemset 'rails g rspec:install'
+run_in_gemset 'rails g cucumber:install'
+
+# CREATE DATABASES
+run_in_gemset "rake db:create:all"
+
 # CONFIGURE GIT AND INITIALIZE A REPOSITORY
 # Create a standard .gitignore file.
 get_template_file "dot_gitignore", ".gitignore"
@@ -98,24 +113,3 @@ get_template_file "dot_gitignore", ".gitignore"
 git :init
 git :add => '.'
 git :commit => "-a -q -m 'Initial commit'"
-
-# INSTALL GEMS
-#   Note: We generate bin stubs so that we don't need to use
-#   'bundle exec' before gem executables. You should add
-#   './bin' to your path so that you can run 'rake', 'cucumber'
-#   etc from the Gemfile with ease.
-#   See http://yehudakatz.com/2011/05/30/gem-versioning-and-bundler-doing-it-right/
-run "rvm #{RUBY_GEMSET_NAME} gem install bundler"
-run_in_gemset "bundle install --binstubs"
-
-# run 'bundle install --binstubs'
-# run 'bundle install'
-# # Create databases
-
-# SETUP RSPEC AND CUCUMBER
-run_in_gemset 'rails g rspec:install'
-#generate 'rspec:install'
-#generate 'cucumber:install'
-
-# CREATE DATABASES
-#rake 'db:create:all'
