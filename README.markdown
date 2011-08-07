@@ -4,11 +4,11 @@
 
 I will assume you currently have Mac OSX 10.6, XCode / Developer Kit, Git
 
-## Basic Install
+## System Setup
 
 ### Install rvm:
 
-    $ mkdir -p ~/.rvm/src/ && cd ~/.rvm/src && rm -rf ./rvm/ && git clone git://github.com/wayneeseguin/rvm.git && cd rvm && ./install
+    mkdir -p ~/.rvm/src/ && cd ~/.rvm/src && rm -rf ./rvm/ && git clone git://github.com/wayneeseguin/rvm.git && cd rvm && ./install
 
 Add the following to your ~/.bashrc:
 
@@ -17,14 +17,14 @@ Add the following to your ~/.bashrc:
 
 Load your .bashrc:
 
-    $ source ~/.bashrc
-    $ rvm -v
+    source ~/.bashrc
+    rvm -v
 
 ### Install ruby 1.9.2:
 
-    $ rvm install 1.9.2
-    $ rvm 1.9.2 --default
-    $ ruby -v && rvm list && rvm gemdir && gem -v && gem list
+    rvm install 1.9.2
+    rvm 1.9.2 --default
+    ruby -v && rvm list && rvm gemdir && gem -v && gem list
 
 Make gem install not compile rdoc or ri, add the following to ~/.gemrc:
   
@@ -32,10 +32,10 @@ Make gem install not compile rdoc or ri, add the following to ~/.gemrc:
 
 ### Install rails:
 
-    $ gem install rails
-    $ rails -v
+    gem install rails
+    rails -v
 
-## Install Postgres  
+### Install Postgres  
 
 Install with homebrew:
 
@@ -47,27 +47,20 @@ Install with homebrew:
 For more detailed instructions on this setup, see: https://willj.net/2011/05/31/setting-up-postgresql-for-ruby-on-rails-development-on-os-x/
 http://russbrooks.com/2010/11/25/install-postgresql-9-on-os-x
 
-## Install Textmate Bundles
-
-    $ mkdir -p ~/Library/Application\ Support/TextMate/Bundles/
-    $ cd ~/Library/Application\ Support/TextMate/Bundles/
-
-Install rspec textmate bundle:
-
-    $ git clone git://github.com/rspec/rspec-tmbundle.git RSpec.tmbundle
-
-Install Haml textmate bundle:
-
-    $ git clone git://github.com/phuibonhoa/handcrafted-haml-textmate-bundle.git Haml.tmbundle
-
-Install cucumber bundle:
-
-    $ git clone https://github.com/drnic/cucumber-tmbundle Cucumber.tmbundle
-
-Bundles > Bundle Editor > Reload Bundles, in TextMate.
-
 ## Create a new rails application
 
-Create a new app by cloning this repository, and running:
+You can now create a new rails app using:
 
-    $ rails new [app] -J -T -m https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template.rb
+    rails new [app_name] -J -T -m https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template.rb
+    
+I'd recommend creating an alias for this. Put this in your ~/.bashrc:
+
+    function rails_template() { rails new "$@" -J -T -m https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template.rb; }
+
+Now you can create a new app using:
+
+    rails_template [app_name]
+
+## Other setup
+
+That's all you need. But you should take a look at my shared [tm_bundles](https://github.com/mitch101/tm_bundles) and [dotfiles](https://github.com/mitch101/tm_bundles) for some tips on how you can pimp your rails experience.
