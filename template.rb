@@ -106,14 +106,14 @@ git :commit => "-a -q -m 'Initial commit'"
 #   etc from the Gemfile with ease.
 #   See http://yehudakatz.com/2011/05/30/gem-versioning-and-bundler-doing-it-right/
 run "rvm #{RUBY_GEMSET_NAME} gem install bundler"
-#run "rvm #{RUBY_GEMSET_NAME} -S bundle install --binstubs"
+run_in_gemset "rvm #{RUBY_GEMSET_NAME} -S bundle install --binstubs"
 
 # run 'bundle install --binstubs'
 # run 'bundle install'
 # # Create databases
 
 # SETUP RSPEC AND CUCUMBER
-run_in_gemset('rails g rspec:install')
+run_in_gemset 'rails g rspec:install'
 #generate 'rspec:install'
 #generate 'cucumber:install'
 
