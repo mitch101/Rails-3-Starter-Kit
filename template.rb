@@ -71,7 +71,12 @@ remove_file "app/views/layouts/application.html.erb"
 get "#{@template_path}/application.html.haml", "app/views/layouts/application.html.haml"
 
 # INSTALL GEMS
-run 'bundle install'
+#   Note: We generate bin stubs so that we don't need to use
+#   'bundle exec' before gem executables. You should add
+#   './bin' to your path so that you can run 'rake', 'cucumber'
+#   etc from the Gemfile with ease.
+#   See http://yehudakatz.com/2011/05/30/gem-versioning-and-bundler-doing-it-right/
+run 'bundle install --binstubs'
 
 # SETUP RSPEC AND CUCUMBER
 generate 'rspec:install'
