@@ -1,5 +1,5 @@
 # Create a new rails app using:
-# => rails new [app] -m https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template.rb
+# => rails new [app] -J -T -m https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template.rb
 
 # For templating commands, see thor docs: http://rdoc.info/github/wycats/thor/master/Thor/Actions#copy_file-instance_method
 # and rails specific templating commands at: http://edgeguides.rubyonrails.org/generators.html#generator-methods
@@ -19,16 +19,6 @@ gsub_file '.rvmrc', '[ruby_version]', "#{RUBY_VERSION}"
 # REPLACE THE DEFAULT GEMFILE
 remove_file "Gemfile"
 get_template "Gemfile", "Gemfile"
-
-# REMOVE PROTOTYPE
-remove_file 'public/javascripts/rails.js'
-remove_file 'public/javascripts/controls.js'
-remove_file 'public/javascripts/dragdrop.js'
-remove_file 'public/javascripts/effects.js'
-remove_file 'public/javascripts/prototype.js'
-
-# REMOVE TEST UNIT
-remove_dir 'test'
 
 # CONFIGURE GENERATORS
 #   Don't generate stylesheets when scaffolding.

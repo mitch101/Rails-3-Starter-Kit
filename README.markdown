@@ -70,4 +70,4 @@ Bundles > Bundle Editor > Reload Bundles, in TextMate.
 
 Create a new app by cloning this repository, and running:
 
-    $ rails new [app] -m https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template.rb
+    $ rails new [app] -J -T -m https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template.rb
