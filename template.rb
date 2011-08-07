@@ -74,7 +74,7 @@ application generators
 # get_template_file "features/support/env.rb"
 # get_template_file "config/cucumber.yml"
 
-directory(TEMPLATE_PATH + 'template', 'template')
+directory(TEMPLATE_PATH, 'template')
 
 # CREATE GEMSET FOR APP
 run "rvm --create #{RUBY_GEMSET_NAME}"
