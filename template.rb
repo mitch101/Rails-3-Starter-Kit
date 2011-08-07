@@ -34,14 +34,14 @@ remove_dir 'test'
 #   Don't generate stylesheets when scaffolding.
 #   Generate factories using the rails3-generator for factory-girl.
 #   Don't generate specs for views, controllers, helpers, 
-#   or routes in scaffolding.
+#   requests, or routes in scaffolding.
 generators = <<-GENERATORS
 
     config.generators do |g|
       g.stylesheets false
       g.template_engine :haml
       g.test_framework :rspec
-      g.request_specs true
+      g.request_specs false
       g.view_specs false
       g.controller_specs false
       g.helper_specs false
