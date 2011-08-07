@@ -65,6 +65,12 @@ Now you can create a new app using:
 
     rails_template [app_name]
 
+## About rails templates
+
+Rails 3 templates lean heavily on thor. You should check out the [thor docs](http://rdoc.info/github/wycats/thor/master/Thor/Actions).
+Also check out the documentation on [rails specific templating commands](http://edgeguides.rubyonrails.org/generators.html#generator-methods).
+
 ## What next?
 
 That's all you need. Go make an awesome rails app! But, you should take a look at my shared [tm_bundles](https://github.com/mitch101/tm_bundles) and [dotfiles](https://github.com/mitch101/tm_bundles) for some tips on how you can pimp your rails experience.
+

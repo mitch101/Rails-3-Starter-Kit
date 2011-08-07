@@ -1,24 +1,21 @@
-# Create a new rails app using:
-# => rails new [app] -J -T -m https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template.rb
-
-# For templating commands, see thor docs: http://rdoc.info/github/wycats/thor/master/Thor/Actions#copy_file-instance_method
-# and rails specific templating commands at: http://edgeguides.rubyonrails.org/generators.html#generator-methods
+# Template for creating an awesome rails 3 app!
+# See the README for more info.
 
 RUBY_VERSION = "ruby-1.9.2-p290"
-TEMPLATE_PATH = "https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/"
+TEMPLATE_PATH = "https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template"
 
-def get_template(template_file, *destination)
+def get_template_file(template_file, destination = template_file)
+  remove_file destination
   get TEMPLATE_PATH + template_file, destination
 end
 
 # SETUP RVM TO CREATE PROJECT SPECIFIC GEMSET
-get_template "dot_rvmrc", ".rvmrc"
+get_template_file "dot_rvmrc", ".rvmrc"
 gsub_file '.rvmrc', '[app_name]', "#{app_name}"
 gsub_file '.rvmrc', '[ruby_version]', "#{RUBY_VERSION}"
 
 # REPLACE THE DEFAULT GEMFILE
-remove_file "Gemfile"
-get_template "Gemfile", "Gemfile"
+get_template_file "Gemfile"
 
 # CONFIGURE GENERATORS
 #   Don't generate stylesheets when scaffolding.
@@ -46,8 +43,7 @@ application generators
 #   Include jquery hosted by google.
 #   Include underscore.js hosted by cdnjs
 #   Include compass generated css.
-remove_file "app/views/layouts/application.html.erb"
-get_template "application.html.haml", "app/views/layouts/application.html.haml"
+get_template_file "app/views/layouts/application.html.haml"
 
 # INSTALL GEMS
 #   Note: We generate bin stubs so that we don't need to use
@@ -69,7 +65,7 @@ if yes?("\r\nInstall with postgres?")
   # Create a database.yml for postgres
   postgres_pass = ask("\r\nEnter your postgres password:")
   remove_file "config/database.yml"
-  get_template "database.yml", "config/database.yml"
+  get_template "config/database.yml"
   gsub_file 'config/database.yml', '[app_name]',"#{app_name}"
   gsub_file 'config/database.yml', '[postgres_pass]',"#{postgres_pass}" 
   # Install pg gem.
@@ -84,19 +80,17 @@ rake "db:migrate"
 
 # INSTALL COMPASS
 # Create compass config file.
-get_template "compass.rb", "config/compass.rb"
+get_template "config/compass.rb"
 # Setup default sass files.
-empty_directory "app/stylesheets"
-empty_directory "app/stylesheets/partials"
-get_template "ie.scss", "app/stylesheets/ie.scss"
-get_template "print.scss", "app/stylesheets/print.scss"
-get_template "application.scss", "app/stylesheets/application.scss"
-get_template "_base.scss", "app/stylesheets/partials/_base.scss"
+get_template "app/stylesheets/ie.scss"
+get_template "app/stylesheets/print.scss"
+get_template "app/stylesheets/application.scss"
+get_template "app/stylesheets/partials/_base.scss"
 # Include a styleguide accessible at /styleguide.html
-get_template "styleguide.html", "public/styleguide.html"
+get_template "public/styleguide.html"
 
 # CREATE GUARDFILE
-get_template "Guardfile", "Guardfile"
+get_template "Guardfile"
 
 # CLEANUP SOME SILLY DEFAULT RAILS FILES
 remove_file 'public/index.html'
@@ -104,7 +98,6 @@ remove_file 'public/images/rails.png'
 
 # CONFIGURE GIT AND INITIALIZE A REPOSITORY
 # Create a standard .gitignore file.
-remove_file ".gitignore"
 get_template "dot_gitignore", ".gitignore"
 # Initialize a git repository.
 git :init
