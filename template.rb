@@ -13,6 +13,8 @@ end
 get_template_file "dot_rvmrc", ".rvmrc"
 gsub_file '.rvmrc', '[app_name]', "#{app_name}"
 gsub_file '.rvmrc', '[ruby_version]', "#{RUBY_VERSION}"
+# Execute the rvmrc to create and use a new gemset for this app.
+run '.rvmrc'
 
 # REPLACE THE DEFAULT GEMFILE
 get_template_file "Gemfile"
