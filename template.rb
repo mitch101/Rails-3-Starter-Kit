@@ -17,23 +17,19 @@ gem 'rails', '3.0.9'
 gem 'sqlite3'
 gem "haml-rails"
 gem "compass"
-group :development, :test do
-  gem "factory_girl_rails"
-  gem "rails3-generators"
-  gem "ruby-debug19"
-  gem 'spork', '>=0.9.0.rc7'
-  gem 'guard'
-  gem 'guard-spork'
-  gem 'growl'
-  gem 'guard-rspec'
-  gem 'guard-cucumber'
-end
-group :test do
-  gem "rspec-rails"
-  gem "cucumber-rails"
-  gem "database_cleaner"
-  gem "capybara"
-end
+gem "factory_girl_rails", :group => [:development, :test]
+gem "rails3-generators", :group => [:development, :test]
+gem "ruby-debug19", :group => [:development, :test]
+gem 'spork', '>=0.9.0.rc7', :group => [:development, :test]
+gem 'guard', :group => [:development, :test]
+gem 'guard-spork', :group => [:development, :test]
+gem 'growl', :group => [:development, :test]
+gem 'guard-rspec', :group => [:development, :test]
+gem 'guard-cucumber', :group => [:development, :test]
+gem "rspec-rails", :group => [:test]
+gem "cucumber-rails", :group => [:test]
+gem "database_cleaner", :group => [:test]
+gem "capybara", :group => [:test]
 
 # REMOVE PROTOTYPE
 remove_file 'public/javascripts/rails.js'
