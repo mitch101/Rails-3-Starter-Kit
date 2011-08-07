@@ -4,14 +4,14 @@
 # development environment upon cd'ing into the directory.
 # For more info, see: http://beginrescueend.com/
 
-ruby_string="[ruby_version]"
-gemset_name="[app_name]"
+ruby_gemset_name="[ruby_gemset_name]"
+ruby_name="[ruby_name]"
 
 echo `pwd`
 echo "HELLOWORLD!"
 
 # Ensure we have the right ruby installed to use this project.
-if rvm list strings | grep -q "${ruby_string}" ; then
+if rvm list strings | grep -q "${ruby_name}" ; then
 
   # Load or create the specified environment
   #   We attempt to load the desired environment directly from the environment
@@ -19,11 +19,11 @@ if rvm list strings | grep -q "${ruby_string}" ; then
   #   CLI and selector. If you want feedback on which environment was used then
   #   insert the word 'use' after --create as this triggers verbose mode.
   if [[ -d "${rvm_path:-$HOME/.rvm}/environments" \
-    && -s "${rvm_path:-$HOME/.rvm}/environments/${ruby_string}@${gemset_name}" ]] ; then
-    \. "${rvm_path:-$HOME/.rvm}/environments/${ruby_string}@${gemset_name}"
+    && -s "${rvm_path:-$HOME/.rvm}/environments/${ruby_gemset_name}" ]] ; then
+    \. "${rvm_path:-$HOME/.rvm}/environments/${ruby_gemset_name}"
   else
     # If the environment file has not yet been created, use the RVM CLI to select.
-    if ! rvm --create  "${ruby_string}@${gemset_name}"
+    if ! rvm --create  "${ruby_gemset_name}"
     then
       echo "Failed to create RVM environment '$environment_id'."
     fi
@@ -43,6 +43,6 @@ if rvm list strings | grep -q "${ruby_string}" ; then
 else
 
   # Notify the user to install the desired interpreter before proceeding.
-  echo "${ruby_string} was not found, please run 'rvm install ${ruby_string}' and then cd back into the project directory."
+  echo "${ruby_name} was not found, please run 'rvm install ${ruby_name}' and then cd back into the project directory."
 
 fi

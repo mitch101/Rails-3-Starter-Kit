@@ -1,7 +1,9 @@
 # Template for creating an awesome rails 3 app!
 # See the README for more info.
 
-RUBY_VERSION = "ruby-1.9.2-p290"
+APP_NAME = app_name
+RUBY_NAME = "ruby-1.9.2-p290"
+RUBY_GEMSET_NAME = "#{RUBY_VERSION}@#{APP_NAME}"
 TEMPLATE_PATH = "https://raw.github.com/mitch101/Rails-3-Starter-Kit/master/template/"
 
 def get_template_file(template_file, destination = template_file)
@@ -9,12 +11,16 @@ def get_template_file(template_file, destination = template_file)
   get TEMPLATE_PATH + template_file, destination
 end
 
-# SETUP RVM TO CREATE PROJECT SPECIFIC GEMSET
+# CREATE AND USE A PROJECT SPECIFIC GEMSET
+run("rvm --create #{RUBY_GEMSET_NAME}")
+
+# INSTALL BUNDLER
+run("gem install bundler")
+
+# SETUP RVM TO USE/CREATE PROJECT SPECIFIC GEMSET WHEN CD INTO PROJECT
 get_template_file "dot_rvmrc", ".rvmrc"
-gsub_file '.rvmrc', '[app_name]', "#{app_name}"
-gsub_file '.rvmrc', '[ruby_version]', "#{RUBY_VERSION}"
-# Execute the rvmrc to create and use a new gemset for this app.
-run "./#{app_name}/.rvmrc"
+gsub_file '.rvmrc', '[ruby_name]', "#{RUBY_NAME}"
+gsub_file '.rvmrc', '[ruby_gemset_name]', "#{RUBY_GEMSET_NAME}"
 
 # REPLACE THE DEFAULT GEMFILE
 get_template_file "Gemfile"
@@ -68,7 +74,7 @@ if yes?("\r\nInstall with postgres?")
   postgres_pass = ask("\r\nEnter your postgres password:")
   remove_file "config/database.yml"
   get_template "config/database.yml"
-  gsub_file 'config/database.yml', '[app_name]',"#{app_name}"
+  gsub_file 'config/database.yml', '[app_name]',"#{APP_NAME}"
   gsub_file 'config/database.yml', '[postgres_pass]',"#{postgres_pass}" 
   # Install pg gem.
   gem 'pg'
