@@ -4,7 +4,7 @@ default: --format pretty --strict --drb features
 
 # Wip (rake cucumber:wip / cucumber --profile wip).
 # Run only @wip tags, maximum of 3 allowed.
-wip: --format pretty --strict --drb --tags @wip:3 --wip features
+wip: --format pretty --drb --tags @wip:3 --wip features
 
 # Rerun: (see here: http://devnet.jetbrains.net/message/5261019)
 <%

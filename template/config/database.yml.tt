@@ -1,0 +1,34 @@
+<% if USE_POSTGRES -%>
+development: &postgres
+  adapter: postgresql
+  encoding: unicode
+  pool: 5
+  username: postgres
+  password: <%= POSTGRES_PASS %>
+  database: <%= APP_NAME %>_development
+
+production:
+  <<: *postgres
+  database: <%= APP_NAME %>_production
+
+test: &test
+  <<: *postgres
+  database: <%= APP_NAME %>_test
+<% else -%>
+development: &sqlite
+  adapter: sqlite3
+  database: db/development.sqlite3
+  pool: 5
+  timeout: 5000
+  
+production:
+  <<: *sqlite
+  database: db/production.sqlite3
+  
+test: &test
+  <<: *sqlite
+  database: db/test.sqlite3
+<% end -%>
+
+cucumber:
+  <<: *test  
